@@ -27,15 +27,15 @@ Route::group(['middleware' => ['auth']], function () {
 	///// //////////////////////////////////ADMIN ///////////////////////////////////////////////////
 
 	// Inicio
-	Route::get('/admin_panel/', 'AdminController@index')->name('admin');
+	Route::get('/admin', 'AdminController@index')->name('admin');
 
 	// Administradores
-	Route::get('/admin_panel/administradores', 'AdministratorController@index')->name('administradores.index');
-	Route::get('/admin_panel/administradores/registrar', 'AdministratorController@create')->name('administradores.create');
-	Route::post('/admin_panel/administradores', 'AdministratorController@store')->name('administradores.store');
-	Route::get('/admin_panel/administradores/{slug}', 'AdministratorController@show')->name('administradores.show');
-	Route::get('/admin_panel/administradores/{slug}/editar', 'AdministratorController@edit')->name('administradores.edit');
-	Route::put('/admin_panel/administradores/{slug}', 'AdministratorController@update')->name('administradores.update');
-	Route::put('/admin_panel/administradores/activar/{slug}', 'AdministratorController@activate')->name('administradores.activate');
-	Route::put('/admin_panel/administradores/desactivar/{slug}', 'AdministratorController@deactivate')->name('administradores.deactivate');
+	Route::get('/admin/administradores', 'AdministratorController@index')->name('administradores.index');
+	Route::get('/admin/administradores/registrar', 'AdministratorController@create')->name('administradores.create');
+	Route::post('/admin/administradores', 'AdministratorController@store')->name('administradores.store');
+	Route::get('/admin/administradores/{slug}', 'AdministratorController@show')->name('administradores.show');
+	Route::get('/admin/administradores/{slug}/editar', 'AdministratorController@edit')->name('administradores.edit');
+	Route::put('/admin/administradores/{slug}', 'AdministratorController@update')->name('administradores.update');
+	Route::put('/admin/administradores/activar/{slug}', 'AdministratorController@activate')->name('administradores.activate');
+	Route::put('/admin/administradores/desactivar/{slug}', 'AdministratorController@deactivate')->name('administradores.deactivate');
 });

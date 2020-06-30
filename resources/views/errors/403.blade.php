@@ -1,14 +1,16 @@
 @extends('layouts.error')
 
-@section('title', '403')
+@section('title', 'Error 403')
 
 @section('content')
 
-<div class="error-body text-center">
-	<h1>403</h1>
-	<h3 class="text-uppercase">Error de Prohibición!</h3>
-	<p class="text-muted m-t-30 m-b-30">NO TIENES PERMISO PARA ACCEDER A ESTE SITIO.</p>
-	<a href="{{ route('home') }}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Volver al Inicio</a>
+<div class="container-fluid error-content">
+	<div class="">
+		<h1 class="error-number">403</h1>
+		<p class="mini-text">Error de prohibición!</p>
+		<p class="error-text mb-4 mt-1">No tienes permiso para acceder a este sitio!</p>
+		<a href="{{ route('home') }}" class="btn btn-primary mt-5">Volver al Inicio</a>
+	</div>
 </div>
 
 @endsection

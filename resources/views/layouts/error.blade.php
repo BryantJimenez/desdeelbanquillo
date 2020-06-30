@@ -1,33 +1,30 @@
 <!DOCTYPE html>
-<html lang="es" class="no-js">
+<html lang="es">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	
-	<link rel="icon" href="{{ asset('/auth/images/icons/favicon.ico') }}" type="image/x-icon" />
 	<title>@yield('title')</title>
-	<meta name="author" content="">
+	<link rel="icon" type="image/x-icon" href="{{ asset('/admins/img/favicon.ico') }}"/>
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
+	<link href="{{ asset('/admins/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('/admins/css/plugins.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('/admins/css/pages/error/style-400.css') }}" rel="stylesheet" type="text/css" />
+	<!-- END GLOBAL MANDATORY STYLES -->
 
-	<link href="{{ asset('/admins/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('/admins/css/style.css') }}" rel="stylesheet">
-	<link href="{{ asset('/admins/css/error-pages.css') }}" rel="stylesheet">
-	<link href="{{ asset('/admins/css/colors/default-dark.css') }}" rel="stylesheet" type="text/css">
 </head>
-<body class="fix-header card-no-border fix-sidebar">
+<body class="error404 text-center">
 
-	<section id="wrapper" class="error-page">
-		<div class="error-box">
+	<!-- CONTENT AREA -->
+	@yield('content')
+	<!-- CONTENT AREA -->
 
-			@yield('content')
-
-		</div>
-	</section>
-
-	<script src="{{ asset('/admins/js/jquery/jquery.min.js') }}"></script>
+	<!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+	<script src="{{ asset('/admins/js/libs/jquery-3.1.1.min.js') }}"></script>
 	<script src="{{ asset('/admins/js/bootstrap/popper.min.js') }}"></script>
 	<script src="{{ asset('/admins/js/bootstrap/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('/admins/js/waves.js') }}"></script>
+	<!-- END GLOBAL MANDATORY SCRIPTS -->
 </body>
 </html>

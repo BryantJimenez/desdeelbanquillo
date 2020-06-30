@@ -1,47 +1,49 @@
-<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <p class="h5 text-body text-center mt-2 mb-3">Ingresar a mi Cuenta</p>
+@extends('layouts.auth')
 
-        @include('admin.partials.errors')
+@section('content')
 
-        <div class="form-group col-12">
-          <button type="submit" class="btn btn-facebook rounded text-white px-3 w-100">Continuar con Facebook</button>
-        </div>
-        <div class="form-group col-12">
-          <div class="line line-top">
-            <small class="sub">O ingresar con tu email</small>
-            <hr>
-          </div>
-        </div>
-        <form action="{{ route('login') }}" method="POST" id="formLogin">
-          {{ csrf_field() }}
-          <div class="form-group col-12">
-            <input class="form-control @error('email') is-invalid @enderror py-4 pl-1" type="email" name="email" required placeholder="Email" value="{{ old('email') }}">
-          </div>
-          <div class="form-group col-12">
-            <input class="form-control @error('password') is-invalid @enderror py-4 pl-1" type="password" name="password" required placeholder="Contraseña">
-          </div>
-          <div class="form-group col-12 d-flex justify-content-between">
-            <div>
-              <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'class="checked"' : '' }}>
-              <label class="text-body small mb-0" for="remember">Recordarme</label>
+<div class="form-container outer bg-primary">
+  <div class="form-form">
+    <div class="form-form-wrap">
+      <div class="form-container">
+        <div class="form-content">
+
+          <h1 class="">Ingresar</h1>
+
+          @include('admin.partials.errors')
+
+          <form class="text-left" action="{{ route('login') }}" method="POST" id="formLogin">
+            {{ csrf_field() }}
+            <div class="form">
+
+              <div id="username-field" class="field-wrapper input">
+                <label for="email">CORREO</label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <input id="email" name="email" type="email" class="form-control" placeholder="{{ 'admin@gmail.com' }}">
+              </div>
+
+              <div id="password-field" class="field-wrapper input mb-2">
+                <div class="d-flex justify-content-between">
+                  <label for="password">CONTRASEÑA</label>
+                  <a href="{{ route('password.request') }}" class="forgot-pass-link">Olvidé mi contraseña</a>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <input id="password" name="password" type="password" class="form-control" placeholder="********">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="toggle-password" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </div>
+              <div class="d-sm-flex justify-content-between">
+                <div class="field-wrapper">
+                  <button type="submit" class="btn btn-primary" action="login">Ingresar</button>
+                </div>
+              </div>
+
             </div>
-            <a href="javascript:void(0);">Olvidé mi contraseña</a>
-          </div>
-          <div class="form-group col-12">
-            <button type="submit" class="btn btn-primary rounded font-weight-bold text-white w-100" action="login">Ingresar</button>
-          </div>
-          <div class="form-group col-12">
-            <p class="text-body text-center small mb-0">¿Todavía no tenés una cuenta? <a href="javascript:void(0);" class="btn-register">Registrate</a></p>
-          </div>
+          </form>
 
-        </form>
+        </div>                    
       </div>
     </div>
   </div>
 </div>
+
+@endsection

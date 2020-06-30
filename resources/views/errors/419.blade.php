@@ -1,14 +1,14 @@
 @extends('layouts.error')
 
-@section('title', 'Error 503')
+@section('title', 'Error 419')
 
 @section('content')
 
 <div class="container-fluid error-content">
 	<div class="">
-		<h1 class="error-number">503</h1>
-		<p class="mini-text">Este sitio cargara en pocos minutos!</p>
-		<p class="error-text mb-4 mt-1">Por favor intentelo más tarde!</p>
+		<h1 class="error-number">419</h1>
+		<p class="mini-text">Sesión expirada!</p>
+		<p class="error-text mb-4 mt-1">Tu sesión ha expirado!</p>
 		<a href="{{ route('home') }}" class="btn btn-primary mt-5">Volver al Inicio</a>
 	</div>
 </div>

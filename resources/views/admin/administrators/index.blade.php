@@ -4,6 +4,7 @@
 
 @section('links')
 <link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/table/datatable/datatables.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/table/datatable/custom_dt_html5.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/table/datatable/dt-global_style.css') }}">
 <link href="{{ asset('/admins/vendor/sweetalerts/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/admins/vendor/sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css" />
@@ -27,10 +28,12 @@
 
 				<div class="row">
 					<div class="col-12">
-						<a href="{{ route('administradores.create') }}" class="btn btn-primary">Registrar</a>
+						<div class="text-right">
+							<a href="{{ route('administradores.create') }}" class="btn btn-primary">Agregar</a>
+						</div>
 
 						<div class="table-responsive mb-4 mt-4">
-							<table class="table table-hover">
+							<table class="table table-hover table-export">
 								<thead>
 									<tr>
 										<th>Nombre Completo</th>
@@ -120,6 +123,10 @@
 
 @section('scripts')
 <script src="{{ asset('/admins/vendor/table/datatable/datatables.js') }}"></script>
+<script src="{{ asset('/admins/vendor/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('/admins/vendor/table/datatable/button-ext/jszip.min.js') }}"></script>    
+<script src="{{ asset('/admins/vendor/table/datatable/button-ext/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('/admins/vendor/table/datatable/button-ext/buttons.print.min.js') }}"></script>
 <script src="{{ asset('/admins/vendor/sweetalerts/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('/admins/vendor/sweetalerts/custom-sweetalert.js') }}"></script>
 @endsection

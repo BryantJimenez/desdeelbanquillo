@@ -81,7 +81,7 @@ class RegisterController extends Controller
         while (true) {
             $count2=User::where('slug', $slug)->count();
             if ($count2>0) {
-                $slug=$slug."-".$num;
+                $slug=Str::slug($data['name']." ".$data['lastname'], '-')."-".$num;
                 $num++;
             } else {
                 break;
@@ -95,21 +95,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ]);
-
-        // if ($user) {
-        //     $client_data=new User;
-        //     $client_data->name = $data['name'];
-        //     $client_data->lastname = $data['lastname'];
-        //     $client_data->email = $data['email'];
-        //     $client_data->password_customer = $data['password'];
-        //     $client_data->notify(new UserRegister());
-
-        //     $client_data=new User;
-        //     $client_data->name = $data['name'];
-        //     $client_data->lastname = $data['lastname'];
-        //     $client_data->email = 'pedidosmaesma@gmail.com';
-        //     $client_data->notify(new NewUserRegister());
-        // }
 
         return $user;
     }

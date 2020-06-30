@@ -38,8 +38,8 @@
 	@include('web.partials.loader')
 
 	@guest
-	@include('auth.login')
-	@include('auth.register')
+	@include('web.partials.login')
+	@include('web.partials.register')
 	@endguest
 
 	<!-- JQuery -->
