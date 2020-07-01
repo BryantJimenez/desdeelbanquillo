@@ -4,9 +4,9 @@
         <div class="profile-info">
             <figure class="user-cover-image"></figure>
             <div class="user-info">
-                <img src="{{ asset('/admins/img/template/90x90.jpg') }}" alt="avatar">
-                <h6 class="">Sonia Shaw</h6>
-                <p class="">Project Leader</p>
+                <img src="{{ asset('/admins/img/pelotaredonda.png') }}" width="90" height="90" alt="logo">
+                <h6 class="">Portal Deportivo</h6>
+                <p class="">Sistema de Gestión</p>
             </div>
         </div>
         <div class="shadow-bottom"></div>
