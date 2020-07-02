@@ -26,7 +26,7 @@
 					<div class="col-xl-5 col-12 mb-3"> 
 						<div class="d-flex justify-content-start text-white card-left-radius border-solid border-width-5px border-grey"> 
 							<div class="rounded-circle border-solid border-width-5px border-grey">
-								<img src="{{ asset('/admins/img/logoredondo.png') }}" width="90" height="90" alt="Logo">
+								<img src="{{ asset('/admins/img/logoredondo.png') }}" width="105" height="105" alt="Logo">
 							</div>
 							<div class="py-2">
 								<p class="h5 text-primary font-weight-bold pl-2">Bienvenido:</p>
@@ -38,7 +38,7 @@
 					<div class="offset-xl-1 col-xl-3 col-md-6 col-sm-6 col-12 mb-3"> 
 						<div class="d-flex justify-content-start text-white card-left-radius border-solid border-width-5px border-grey"> 
 							<div class="rounded-circle border-solid border-width-5px border-grey">
-								<img src="{{ asset('/admins/img/icons/news.png') }}" width="90" height="90" alt="Noticias">
+								<img src="{{ asset('/admins/img/icons/news.png') }}" width="105" height="105" alt="Noticias">
 							</div>
 							<div class="py-2">
 								<p class="h5 font-weight-bold pl-2">Noticias</p>
@@ -50,7 +50,7 @@
 					<div class="col-xl-3 col-md-6 col-sm-6 col-12 mb-3"> 
 						<div class="d-flex justify-content-start text-white card-left-radius border-solid border-width-5px border-grey"> 
 							<div class="rounded-circle border-solid border-width-5px border-grey">
-								<img src="{{ asset('/admins/img/icons/usuarios.png') }}" width="90" height="90" alt="Usuarios">
+								<img src="{{ asset('/admins/img/icons/usuarios.png') }}" width="105" height="105" alt="Usuarios">
 							</div>
 							<div class="py-2">
 								<p class="h5 font-weight-bold pl-2">Usuarios</p>

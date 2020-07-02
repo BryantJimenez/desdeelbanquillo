@@ -60,7 +60,7 @@ class AdministratorController extends Controller
         // Mover imagen a carpeta users y extraer nombre
         if ($request->hasFile('photo')) {
             $file=$request->file('photo');
-            $photo=time()."_".$file->getClientOriginalName();
+            $photo=$slug.".".$file->getClientOriginalExtension();
             $file->move(public_path().'/admins/img/users/', $photo);
             $data['photo']=$photo;
         }
@@ -111,7 +111,7 @@ class AdministratorController extends Controller
         // Mover imagen a carpeta users y extraer nombre
         if ($request->hasFile('photo')) {
             $file=$request->file('photo');
-            $photo=time()."_".$file->getClientOriginalName();
+            $photo=$slug.".".$file->getClientOriginalExtension();
             $file->move(public_path().'/admins/img/users/', $photo);
             $data['photo']=$photo;
         }
@@ -128,7 +128,7 @@ class AdministratorController extends Controller
     public function deactivate(Request $request, $slug) {
 
         $admin = User::where('slug', $slug)->firstOrFail();
-        $admin->fill(['state' => 0])->save();
+        $admin->fill(['state' => "0"])->save();
 
         if ($admin) {
             return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El administrador ha sido desactivado exitosamente.']);
@@ -140,7 +140,7 @@ class AdministratorController extends Controller
     public function activate(Request $request, $slug) {
 
         $admin = User::where('slug', $slug)->firstOrFail();
-        $admin->fill(['state' => 1])->save();
+        $admin->fill(['state' => "1"])->save();
 
         if ($admin) {
             return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El administrador ha sido activado exitosamente.']);

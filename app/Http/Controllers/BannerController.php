@@ -163,6 +163,18 @@ class BannerController extends Controller
         }
     }
 
+    public function destroy($slug)
+    {
+        $banner=Banner::where('slug', $slug)->firstOrFail();
+        $banner->delete();
+
+        if ($banner) {
+            return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Eliminación exitosa', 'msg' => 'El banner ha sido eliminado exitosamente.']);
+        } else {
+            return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Eliminación fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+        }
+    }
+
     public function deactivate(Request $request, $slug) {
 
         $banner = Banner::where('slug', $slug)->firstOrFail();

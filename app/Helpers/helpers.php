@@ -10,6 +10,16 @@ function state($state) {
 	}
 }
 
+function stateNew($state) {
+	if ($state==1) {
+		return '<span class="badge badge-primary">Publicado</span>';
+	} elseif ($state==2) {
+		return '<span class="badge badge-info">Borrador</span>';
+	} else {
+		return '<span class="badge badge-dark">Desconocido</span>';
+	}
+}
+
 function typeUser($type, $badge=1) {
 	if ($badge==1) {
 		if ($type==1) {

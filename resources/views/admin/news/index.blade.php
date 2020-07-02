@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Lista de Categorías')
+@section('title', 'Lista de Noticias')
 
 @section('links')
 <link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/table/datatable/datatables.css') }}">
@@ -20,7 +20,7 @@
 			<div class="widget-header">
 				<div class="row">
 					<div class="col-xl-12 col-md-12 col-sm-12 col-12">
-						<h4>Lista de Categorías</h4>
+						<h4>Lista de Noticias</h4>
 					</div>                 
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="text-right">
-							<a href="{{ route('categorias.create') }}" class="btn btn-primary">Agregar</a>
+							<a href="{{ route('noticias.create') }}" class="btn btn-primary">Agregar</a>
 						</div>
 
 						<div class="table-responsive mb-4 mt-4">
@@ -37,19 +37,23 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>Nombre</th>
+										<th>Título</th>
+										<th>Categoría</th>
+										<th>Estado</th>
 										<th>Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($categories as $category)
+									@foreach($news as $new)
 									<tr>
 										<td>{{ $num++ }}</td>
-										<td>{{ $category->name }}</td>
+										<td>{{ $new->title }}</td>
+										<td>{{ $new->category->name }}</td>
+										<td>{!! stateNew($new->state) !!}</td>
 										<td>
 											<div class="btn-group" role="group">
-												<a href="{{ route('categorias.edit', ['slug' => $category->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Editar"><i class="fa fa-edit"></i></a>
-												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Eliminar" onclick="deleteCategory('{{ $category->slug }}')"><i class="fa fa-trash"></i></button>
+												<a href="{{ route('noticias.edit', ['slug' => $new->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Eliminar" onclick="deleteNew('{{ $new->slug }}')"><i class="fa fa-trash"></i></button>
 											</div>
 										</td>
 									</tr>
@@ -66,18 +70,18 @@
 
 </div>
 
-<div class="modal fade" id="deleteCategory" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="deleteNew" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">¿Estás seguro de que quieres eliminar esta categoría?</h5>
+				<h5 class="modal-title">¿Estás seguro de que quieres eliminar esta noticia?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
-				<form action="#" method="POST" id="formDeleteCategory">
+				<form action="#" method="POST" id="formDeleteNew">
 					@csrf
 					@method('DELETE')
 					<button type="submit" class="btn btn-primary">Eliminar</button>

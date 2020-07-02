@@ -14,7 +14,7 @@
 /////////////////////////////////////// AUTH ////////////////////////////////////////////////////
 
 Auth::routes();
-// Route::get('/registro/email', 'UserController@emailVerify');
+Route::get('/registro/email', 'UserController@emailVerify');
 
 // ///////////////////////////////////////////// WEB ////////////////////////////////////////////////
 
@@ -41,6 +41,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	// Usuarios
 	Route::get('/admin/usuarios', 'UserController@index')->name('usuarios.index');
+	Route::get('/admin/usuarios/{slug}', 'UserController@show')->name('usuarios.show');
+	Route::delete('/admin/usuarios/{slug}', 'UserController@destroy')->name('usuarios.delete');
+	Route::put('/admin/usuarios/{slug}/activar', 'UserController@activate')->name('usuarios.activate');
+	Route::put('/admin/usuarios/{slug}/desactivar', 'UserController@deactivate')->name('usuarios.deactivate');
 
 	// Categorías
 	Route::get('/admin/categorias', 'CategoryController@index')->name('categorias.index');
@@ -51,12 +55,12 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::delete('/admin/categorias/{slug}', 'CategoryController@destroy')->name('categorias.delete');
 
 	// Noticias
-	Route::get('/admin/noticias', 'NewsController@index')->name('noticias.index');
-	Route::get('/admin/noticias/registrar', 'NewsController@create')->name('noticias.create');
-	Route::post('/admin/noticias', 'NewsController@store')->name('noticias.store');
-	Route::get('/admin/noticias/{slug}/editar', 'NewsController@edit')->name('noticias.edit');
-	Route::put('/admin/noticias/{slug}', 'NewsController@update')->name('noticias.update');
-	Route::delete('/admin/noticias/{slug}', 'NewsController@destroy')->name('noticias.delete');
+	Route::get('/admin/noticias', 'NewController@index')->name('noticias.index');
+	Route::get('/admin/noticias/registrar', 'NewController@create')->name('noticias.create');
+	Route::post('/admin/noticias', 'NewController@store')->name('noticias.store');
+	Route::get('/admin/noticias/{slug}/editar', 'NewController@edit')->name('noticias.edit');
+	Route::put('/admin/noticias/{slug}', 'NewController@update')->name('noticias.update');
+	Route::delete('/admin/noticias/{slug}', 'NewController@destroy')->name('noticias.delete');
 
 	// Banners
 	Route::get('/admin/banners', 'BannerController@index')->name('banners.index');
@@ -64,6 +68,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::post('/admin/banners', 'BannerController@store')->name('banners.store');
 	Route::get('/admin/banners/{slug}/editar', 'BannerController@edit')->name('banners.edit');
 	Route::put('/admin/banners/{slug}', 'BannerController@update')->name('banners.update');
+	Route::delete('/admin/banners/{slug}', 'BannerController@destroy')->name('banners.delete');
 	Route::put('/admin/banners/{slug}/activar', 'BannerController@activate')->name('banners.activate');
 	Route::put('/admin/banners/{slug}/desactivar', 'BannerController@deactivate')->name('banners.deactivate');
 });

@@ -206,6 +206,10 @@ $(document).ready(function() {
         "oAria": {
           "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
           "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        },
+        "buttons": {
+          "copy": "Copiar",
+          "print": "Imprimir"
         }
       },
       "stripeClasses": [],
@@ -233,14 +237,30 @@ $(document).ready(function() {
       }
     });
   }
+
+  //CKeditor plugin
+  if ($('#content-news').length) {
+    CKEDITOR.config.height=400;
+    CKEDITOR.config.width='auto';
+    CKEDITOR.replace('content-news');
+  }
 });
 
-// funcion para cambiar el texto de ayuda en banner al cambiar el tipo
+// funcion para cambiar el input hidden al cambiar el switch de estado
 $('#stateCheckbox').change(function(event) {
   if ($(this).is(':checked')) {
     $('#stateHidden').val(1);
   } else {
     $('#stateHidden').val(0);
+  }
+});
+
+// funcion para cambiar el input hidden al cambiar el switch de comentarios
+$('#commentCheckbox').change(function(event) {
+  if ($(this).is(':checked')) {
+    $('#commentHidden').val(1);
+  } else {
+    $('#commentHidden').val(0);
   }
 });
 
@@ -255,6 +275,16 @@ function activeAdmin(slug) {
   $('#formActiveAdmin').attr('action', '/admin/administradores/' + slug + '/activar');
 }
 
+function deactiveUser(slug) {
+  $("#deactiveUser").modal();
+  $('#formDeactiveUser').attr('action', '/admin/usuarios/' + slug + '/desactivar');
+}
+
+function activeUser(slug) {
+  $("#activeUser").modal();
+  $('#formActiveUser').attr('action', '/admin/usuarios/' + slug + '/activar');
+}
+
 function deactiveBanner(slug) {
   $("#deactiveBanner").modal();
   $('#formDeactiveBanner').attr('action', '/admin/banners/' + slug + '/desactivar');
@@ -266,6 +296,16 @@ function activeBanner(slug) {
 }
 
 //funciones para preguntar al eliminar
+function deleteUser(slug) {
+  $("#deleteUser").modal();
+  $('#formDeleteUser').attr('action', '/admin/usuarios/' + slug);
+}
+
+function deleteBanner(slug) {
+  $("#deleteBanner").modal();
+  $('#formDeleteBanner').attr('action', '/admin/banners/' + slug);
+}
+
 function deleteCategory(slug) {
   $("#deleteCategory").modal();
   $('#formDeleteCategory').attr('action', '/admin/categorias/' + slug);

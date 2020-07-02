@@ -22,8 +22,22 @@
 				</div>
 			</div>
 			<div class="col-4 text-right pt-4 pb-2">
+				@guest
 				<a class="btn btn-primary rounded text-uppercase font-weight-bold text-white px-5" data-toggle="modal" data-target="#modal-login">Ingresar</a>
 				<p class="h6 text-white mt-2 mr-2">Eres Nuevo? <a href="#" id="register" data-toggle="modal" data-target="#modal-register">Registrate</a></p>
+				@else
+				<a class="nav-link font-weight-bold text-white dropdown-toggle" href="#" id="navbarUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<img src="{{ asset('/admins/img/users/'.Auth::user()->photo) }}" width="55" width="55" class="rounded-circle">
+					{{ Auth::user()->name." ".Auth::user()->lastname }}
+				</a>
+				<div class="dropdown-menu text-lg-center" aria-labelledby="navbarUser">
+					<a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Editar Perfil</a>
+					<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> Cerrar Sesión</a>
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						@csrf
+					</form>
+				</div>
+				@endguest
 			</div>
 		</div>
 	</div>

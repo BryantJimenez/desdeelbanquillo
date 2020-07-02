@@ -21,13 +21,15 @@ class CreateNewsTable extends Migration
             $table->mediumText('summary');
             $table->mediumText('content');
             $table->string('video')->nullable();
-            $table->enum('featured', [1, 2, 3, 4])->default(1);
+            $table->enum('featured', [1, 2, 3])->nullable();
             $table->enum('comments', [0, 1])->default(1);
-            $table->enum('state', [0, 1, 2])->default(1);
+            $table->enum('state', [1, 2])->default(1);
+            $table->bigInteger('category_id')->unsigned()->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestamps();
 
             #Relations
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }

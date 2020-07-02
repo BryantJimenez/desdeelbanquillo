@@ -213,6 +213,13 @@ a .card-text:hover, a .card-title:hover {
   }
 }
 
+.dropdown-menu[aria-labelledby="navbarUser"] {
+    width: 150px;
+    left: unset !important;
+    right: 60px;
+    z-index: 1001;
+  }
+
 .btn.btn-facebook {
   background: #3b5998;
   border: 1px solid #3b5998;

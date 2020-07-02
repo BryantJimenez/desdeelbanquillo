@@ -45,4 +45,8 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function news() {
+        return $this->hasMany(News::class);
+    }
 }
