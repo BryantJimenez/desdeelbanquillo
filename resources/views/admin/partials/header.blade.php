@@ -26,8 +26,8 @@
                         <div class="media mx-auto">
                             <img src="{{ asset('/admins/img/template/90x90.jpg') }}" class="img-fluid mr-2" alt="avatar">
                             <div class="media-body">
-                                <h5>Sonia Shaw</h5>
-                                <p>Project Leader</p>
+                                <h5>{{ Auth::user()->name." ".Auth::user()->lastname }}</h5>
+                                <p>{{ typeUser(Auth::user()->type, 0) }}</p>
                             </div>
                         </div>
                     </div>

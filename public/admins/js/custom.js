@@ -235,13 +235,51 @@ $(document).ready(function() {
   }
 });
 
+// funcion para cambiar el texto de ayuda en banner al cambiar el tipo
+$('#stateCheckbox').change(function(event) {
+  if ($(this).is(':checked')) {
+    $('#stateHidden').val(1);
+  } else {
+    $('#stateHidden').val(0);
+  }
+});
+
 //funciones para desactivar y activar usuarios
 function deactiveAdmin(slug) {
   $("#deactiveAdmin").modal();
-  $('#formDeactiveAdmin').attr('action', '/admin_panel/administradores/desactivar/' + slug);
+  $('#formDeactiveAdmin').attr('action', '/admin/administradores/' + slug + '/desactivar');
 }
 
 function activeAdmin(slug) {
   $("#activeAdmin").modal();
-  $('#formActiveAdmin').attr('action', '/admin_panel/administradores/activar/' + slug);
+  $('#formActiveAdmin').attr('action', '/admin/administradores/' + slug + '/activar');
 }
+
+function deactiveBanner(slug) {
+  $("#deactiveBanner").modal();
+  $('#formDeactiveBanner').attr('action', '/admin/banners/' + slug + '/desactivar');
+}
+
+function activeBanner(slug) {
+  $("#activeBanner").modal();
+  $('#formActiveBanner').attr('action', '/admin/banners/' + slug + '/activar');
+}
+
+//funciones para preguntar al eliminar
+function deleteCategory(slug) {
+  $("#deleteCategory").modal();
+  $('#formDeleteCategory').attr('action', '/admin/categorias/' + slug);
+}
+
+// funcion para cambiar el texto de ayuda en banner al cambiar el tipo
+$('#banner-type').change(function(event) {
+  if ($(this).val()==1) {
+    $('#text-image-size').text('La imagen debe tener un tamaño de 1410px de ancho y 500px de alto');
+  } else if ($(this).val()==2) {
+    $('#text-image-size').text('La imagen debe tener un tamaño de 1410px de ancho y 93px de alto');
+  } else if ($(this).val()==3) {
+    $('#text-image-size').text('La imagen debe tener un tamaño de 330px de ancho y 360px de alto');
+  } else if ($(this).val()==4) {
+    $('#text-image-size').text('La imagen debe tener un tamaño de 690px de ancho y 210px de alto');
+  }
+});

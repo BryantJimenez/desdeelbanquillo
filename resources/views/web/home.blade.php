@@ -9,24 +9,29 @@
 
 @section('content')
 
+@if(count($carousels)>0)
 <section class="ftco-section py-0">
     <div class="container bg-white pt-1">
         <div id="carousel" class="carousel slide" data-ride="carousel">
+            @if(count($carousels)>1)
             <ol class="carousel-indicators">
-                <li data-target="#carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel" data-slide-to="1"></li>
-                <li data-target="#carousel" data-slide-to="2"></li>
+                @foreach($carousels as $carousel)
+                <li data-target="#carousel" data-slide-to="{{ $num++ }}" @if($loop->first) class="active" @endif></li>
+                @endforeach
             </ol>
+            @endif
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{{ asset('/web/img/bannerprincipal.png') }}" class="d-block w-100 banner-image" alt="Slide 1">
+                @foreach($carousels as $carousel)
+                <div class="carousel-item @if($loop->first) active @endif">
+                    @empty($carousel->url)
+                    <img src="{{ asset('/admins/img/banners/'.$carousel->image) }}" class="d-block w-100 banner-image" alt="{{ $carousel->title }}">
+                    @else
+                    <a href="{{ $carousel->pre_url.$carousel->url }}" @if($carousel->target==2) target="_blank" @endif><img src="{{ asset('/admins/img/banners/'.$carousel->image) }}" class="d-block w-100 banner-image" alt="{{ $carousel->title }}"></a>
+                    @endempty
                 </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('/web/img/bannerprincipal.png') }}" class="d-block w-100 banner-image" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('/web/img/bannerprincipal.png') }}" class="d-block w-100 banner-image" alt="Slide 3">
-                </div>
+                @endforeach
+
+                @if(count($carousels)>1)
                 <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
@@ -35,10 +40,12 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
+                @endif
             </div>
         </div>
     </div>
 </section>
+@endif
 
 <section class="ftco-section py-0">
     <div class="container bg-white py-1">
@@ -103,15 +110,21 @@
     </div>
 </section>
 
+@if(!empty($banner_width))
 <section class="ftco-section py-0">
     <div class="container bg-white py-2">
         <div class="row">
             <div class="col-12">
-                <img src="{{ asset('/web/img/bannerprincipallargo.png') }}" class="w-100" alt="Publicidad">
+                @empty($banner_width->url)
+                <img src="{{ asset('/admins/img/banners/'.$banner_width->image) }}" class="w-100 banner_width_height" alt="{{ $banner_width->title }}">
+                @else
+                <a href="{{ $banner_width->pre_url.$banner_width->url }}" @if($banner_width->target==2) target="_blank" @endif><img src="{{ asset('/admins/img/banners/'.$banner_width->image) }}" class="w-100 banner_width_height" alt="{{ $banner_width->title }}"></a>
+                @endempty
             </div>
         </div>
     </div>
 </section>
+@endif
 
 <section class="ftco-section py-0">
     <div class="container bg-white py-1">
@@ -330,7 +343,13 @@
             </div>
 
             <div class="col-lg-3 col-md-6 col-12 order-lg-2 order-md-1 order-2 pt-2 h-max-content">
-                <img src="{{ asset('/web/img/bannermacdonalds.png') }}" class="w-100 h-md-330-px h-max-content pt-4" alt="Publicidad">
+                @if(!empty($banner_middle))
+                @empty($banner_middle->url)
+                <img src="{{ asset('/admins/img/banners/'.$banner_middle->image) }}" class="w-100 h-md-330-px h-max-content banner_middle_height mt-4" alt="{{ $banner_middle->title }}">
+                @else
+                <a href="{{ $banner_middle->pre_url.$banner_middle->url }}" @if($banner_middle->target==2) target="_blank" @endif><img src="{{ asset('/admins/img/banners/'.$banner_middle->image) }}" class="w-100 h-md-330-px h-max-content banner_middle_height mt-4" alt="{{ $banner_middle->title }}"></a>
+                @endempty
+                @endif
             </div>
         </div>
     </div>
@@ -439,9 +458,15 @@
                         </div>
                     </div>
 
+                    @if(!empty($banner_bottom))
                     <div class="col-12 pb-2">
-                        <img src="{{ asset('/web/img/bannerreebook.png') }}" class="d-block w-100" alt="Publicidad">
+                        @empty($banner_bottom->url)
+                        <img src="{{ asset('/admins/img/banners/'.$banner_bottom->image) }}" class="d-block w-100 banner_bottom_height" alt="{{ $banner_bottom->title }}">
+                        @else
+                        <a href="{{ $banner_bottom->pre_url.$banner_bottom->url }}" @if($banner_bottom->target==2) target="_blank" @endif><img src="{{ asset('/admins/img/banners/'.$banner_bottom->image) }}" class="d-block w-100 banner_bottom_height" alt="{{ $banner_bottom->title }}"></a>
+                        @endempty
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

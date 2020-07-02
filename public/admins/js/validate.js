@@ -35,7 +35,7 @@ $(document).ready(function(){
 
 	//Administradores
 	$("button[action='admin']").on("click",function(){
-		$("#formAdministrators").validate({
+		$("#formAdministrator").validate({
 			rules:
 			{
 				name: {
@@ -115,6 +115,109 @@ $(document).ready(function(){
 					equalTo: 'Los datos ingresados no coinciden.',
 					minlength: 'Escribe mínimo {0} caracteres.',
 					maxlength: 'Escribe máximo {0} caracteres.'
+				}
+			}
+		});
+	});
+
+	//Categorias
+	$("button[action='category']").on("click",function(){
+		$("#formCategory").validate({
+			rules:
+			{
+				name: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				}
+			},
+			messages:
+			{
+				name: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				}
+			}
+		});
+	});
+
+	// Banners
+	$("button[action='banner']").on("click",function(){
+		$("#formBannerCreate").validate({
+			rules:
+			{
+				title: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				type: {
+					required: true
+				},
+
+				state: {
+					required: true
+				},
+
+				image: {
+					required: true
+				}
+			},
+			messages:
+			{
+				title: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				type: {
+					required: 'Seleccione una opción.'
+				},
+
+				state: {
+					required: 'Seleccione una opción.'
+				},
+
+				image: {
+					required: 'Seleccione una imagen.'
+				}
+			}
+		});
+	});
+
+	// Banners
+	$("button[action='banner']").on("click",function(){
+		$("#formBannerEdit").validate({
+			rules:
+			{
+				title: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				type: {
+					required: true
+				},
+
+				state: {
+					required: true
+				}
+			},
+			messages:
+			{
+				title: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				type: {
+					required: 'Seleccione una opción.'
+				},
+
+				state: {
+					required: 'Seleccione una opción.'
 				}
 			}
 		});

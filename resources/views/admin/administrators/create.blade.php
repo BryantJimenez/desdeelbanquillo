@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Registro de Administrador')
+@section('title', 'Crear Administrador')
 
 @section('links')
 <link rel="stylesheet" href="{{ asset('/admins/vendor/dropify/dropify.min.css') }}">
@@ -16,7 +16,7 @@
 			<div class="widget-header">
 				<div class="row">
 					<div class="col-xl-12 col-md-12 col-sm-12 col-12">
-						<h4>Registro de Administrador</h4>
+						<h4>Crear Administrador</h4>
 					</div>                 
 				</div>
 			</div>
@@ -28,7 +28,7 @@
 						@include('admin.partials.errors')
 
 						<p>Campos obligatorios (<b class="text-danger">*</b>)</p>
-						<form action="{{ route('administradores.store') }}" method="POST" class="form" id="formAdministrators" enctype="multipart/form-data">
+						<form action="{{ route('administradores.store') }}" method="POST" class="form" id="formAdministrator" enctype="multipart/form-data">
 							@csrf
 							<div class="row">
 								<div class="form-group col-lg-6 col-md-6 col-12">

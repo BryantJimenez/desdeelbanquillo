@@ -2560,3 +2560,11 @@ label.error {
   /*border: 1px red solid;
   border-top: none;*/
 }
+
+.card-left-radius {
+  border-radius: 100px 30px 30px 100px;
+}
+
+.border-grey {
+  border-color: #F1F2F3 !important;
+}

@@ -31,13 +31,13 @@
 						@include('admin.partials.errors')
 
 						<p>Campos obligatorios (<b class="text-danger">*</b>)</p>
-						<form action="{{ route('administradores.update', ['slug' => $admin->slug]) }}" method="POST" class="form" id="formAdministrators" enctype="multipart/form-data">
+						<form action="{{ route('administradores.update', ['slug' => $admin->slug]) }}" method="POST" class="form" id="formAdministrator" enctype="multipart/form-data">
 							@csrf
 							@method('PUT')
 							<div class="row">
 								<div class="form-group col-lg-6 col-md-6 col-12">
 									<label class="col-form-label">Foto (Opcional)</label>
-									<input type="file" name="photo" accept="image/*" id="input-file-now" class="dropify" data-height="125" data-max-file-size="20M" data-allowed-file-extensions="jpg png jpeg web3"  data-default-file="{{ '/admins/img/users/'.$admin->photo }}" />
+									<input type="file" name="photo" accept="image/*" id="input-file-now" class="dropify" data-height="125" data-max-file-size="20M" data-allowed-file-extensions="jpg png jpeg web3" data-default-file="{{ '/admins/img/users/'.$admin->photo }}" />
 								</div>
 
 								<div class="form-group col-lg-6 col-md-6 col-12">

@@ -545,3 +545,35 @@ img.zoom:hover {
   border-top: 1px solid #E8E8E8;
   border-bottom: 1px solid #FAFAFA;
 }
+
+.banner_width_height {
+  height: 93px;
+}
+
+.banner_middle_height {
+  height: 360px;
+}
+
+.banner_bottom_height {
+  height: 210px;
+}
+
+@media (max-width: 1919px) {
+  .banner_middle_height {
+    height: 300px;
+  }
+}
+
+@media (max-width: 767px) {
+  .banner_width_height {
+    height: unset;
+  }
+
+  .banner_middle_height {
+    height: unset;
+  }
+
+  .banner_bottom_height {
+    height: unset;
+  }
+}
