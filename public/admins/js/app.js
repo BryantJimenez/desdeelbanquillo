@@ -35,7 +35,7 @@ var App = function() {
         scrollCat: function() {
             var sidebarWrapper = document.querySelectorAll('.sidebar-wrapper [aria-expanded="true"]')[0];
             var sidebarWrapperTop = sidebarWrapper.offsetTop - 20;
-            setTimeout(function(){ $('.menu-categories').animate({ scrollTop: sidebarWrapperTop }, 500); }, 500);
+            // setTimeout(function(){ $('.menu-categories').animate({ scrollTop: sidebarWrapperTop }, 500); }, 500);
         }
     }
 

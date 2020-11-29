@@ -37,7 +37,7 @@
 							<div class="row">
 								<div class="form-group col-lg-6 col-md-6 col-12">
 									<label class="col-form-label">Foto (Opcional)</label>
-									<input type="file" name="photo" accept="image/*" id="input-file-now" class="dropify" data-height="125" data-max-file-size="20M" data-allowed-file-extensions="jpg png jpeg web3" data-default-file="{{ '/admins/img/users/'.$admin->photo }}" />
+									<input type="file" name="photo" accept="image/*" id="input-file-now" class="dropify" data-height="125" data-max-file-size="20M" data-allowed-file-extensions="jpg png jpeg web3" data-default-file="{{ '/admins/img/admins/'.$admin->photo }}" />
 								</div>
 
 								<div class="form-group col-lg-6 col-md-6 col-12">
@@ -77,7 +77,7 @@
 									<label class="col-form-label">Estado<b class="text-danger">*</b></label>
 									<select class="form-control" name="state" required>
 										<option value="1" @if($admin->state=="1") selected @endif>Activo</option>
-										<option value="2" @if($admin->state=="0") selected @endif>Inactivo</option>
+										<option value="0" @if($admin->state=="0") selected @endif>Inactivo</option>
 									</select>
 								</div>
 

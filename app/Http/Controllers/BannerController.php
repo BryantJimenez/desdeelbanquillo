@@ -16,8 +16,8 @@ class BannerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $banners = Banner::orderBy('id', 'DESC')->get();
-        $num = 1;
+        $banners=Banner::where('type', "1")->orderBy('id', 'DESC')->get();
+        $num=1;
         return view('admin.banners.index', compact('banners', 'num'));
     }
 
@@ -65,7 +65,7 @@ class BannerController extends Controller
                     $target=0;
                 }
 
-                $data=array('title' => request('title'), 'slug' => $slug, 'type' => request('type'), 'pre_url' => $pre_url, 'url' => request('url'), 'target' => $target, 'state' => request('state'));
+                $data=array('title' => request('title'), 'slug' => $slug, 'featured' => request('featured'), 'pre_url' => $pre_url, 'url' => request('url'), 'target' => $target, 'type' => "1", 'state' => request('state'));
                 break;
             }
         }
@@ -78,17 +78,17 @@ class BannerController extends Controller
             $data['image'] = $image;
         }
 
-        if (request('state')==1 && request('type')!=1) {
-            $count_last = Banner::where('type', request('type'))->where('state', "1")->count();
+        if (request('state')==1 && request('featured')!=1) {
+            $count_last = Banner::where('featured', request('featured'))->where('state', "1")->count();
             if ($count_last>=1) {
-                $last = Banner::where('type', request('type'))->where('state', "1")->orderBy('id', 'DESC')->first();;
+                $last = Banner::where('featured', request('featured'))->where('state', "1")->orderBy('id', 'DESC')->first();
             }
         }
 
         $banner=Banner::create($data);
 
         if ($banner) {
-            if (request('state')==1 && request('type')!=1 && $count_last>=1) {
+            if (request('state')==1 && request('featured')!=1 && $count_last>=1) {
                 $last->fill(['state' => "0"])->save();
             }
 
@@ -131,27 +131,30 @@ class BannerController extends Controller
             $target=0;
         }
 
-        $data=array('title' => request('title'), 'type' => request('type'), 'pre_url' => $pre_url, 'url' => request('url'), 'target' => $target, 'state' => request('state'));
+        $data=array('title' => request('title'), 'featured' => request('featured'), 'pre_url' => $pre_url, 'url' => request('url'), 'target' => $target, 'state' => request('state'));
 
         // Mover imagen a carpeta banners y extraer nombre
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $image = $slug.".".$file->getClientOriginalExtension();
+            if (file_exists(public_path().'/admins/img/banners/'.$image)) {
+                unlink(public_path().'/admins/img/banners/'.$image);
+            }
             $file->move(public_path().'/admins/img/banners/', $image);
             $data['image'] = $image;
         }
 
-        if (request('state')==1 && request('type')!=1) {
-            $count_last = Banner::where('type', request('type'))->where('state', "1")->count();
+        if (request('state')==1 && request('featured')!=1) {
+            $count_last = Banner::where('featured', request('featured'))->where('state', "1")->count();
             if ($count_last>=1) {
-                $last = Banner::where('type', request('type'))->where('state', "1")->orderBy('id', 'DESC')->first();
+                $last = Banner::where('featured', request('featured'))->where('state', "1")->orderBy('id', 'DESC')->first();
             }
         }
 
         $banner->fill($data)->save();
 
         if ($banner) {
-            if (request('state')==1 && request('type')!=1 && $count_last>=1) {
+            if (request('state')==1 && request('featured')!=1 && $count_last>=1) {
                 if ($banner->slug!=$last->slug) {
                     $last->fill(['state' => "0"])->save();
                 }
@@ -190,22 +193,21 @@ class BannerController extends Controller
     public function activate(Request $request, $slug) {
         $banner = Banner::where('slug', $slug)->firstOrFail();
 
-        if ($banner->type!=1) {
-            $count_last = Banner::where('type', $banner->type)->where('state', "1")->count();
+        if ($banner->featured!=1) {
+            $count_last = Banner::where('featured', $banner->featured)->where('state', "1")->count();
             if ($count_last>=1) {
-                $last = Banner::where('type', $banner->type)->where('state', "1")->orderBy('id', 'DESC')->first();
+                $last = Banner::where('featured', $banner->featured)->where('state', "1")->orderBy('id', 'DESC')->first();
             }
         }
 
         $banner->fill(['state' => "1"])->save();
 
-        if ($banner->type!=1 && $count_last>=1) {
-            if ($banner->slug!=$last->slug) {
-                $last->fill(['state' => "0"])->save();
-            }
-        }
-
         if ($banner) {
+            if ($banner->featured!=1 && $count_last>=1) {
+                if ($banner->slug!=$last->slug) {
+                    $last->fill(['state' => "0"])->save();
+                }
+            }
             return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El banner ha sido activado exitosamente.']);
         } else {
             return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);

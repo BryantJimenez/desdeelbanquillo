@@ -39,12 +39,12 @@
 								</div>
 
 								<div class="form-group col-12">
-									<label class="col-form-label">Tipo<b class="text-danger">*</b></label>
-									<select class="form-control" name="type" required id="banner-type">
-										<option value="1" @if(old('type')=="1") selected @endif>Principal Superior</option>
-										<option value="2" @if(old('type')=="2") selected @endif>Principal Alargado</option>
-										<option value="3" @if(old('type')=="3") selected @endif>Principal Medio</option>
-										<option value="4" @if(old('type')=="4") selected @endif>Principal Inferior</option>
+									<label class="col-form-label">Destacado<b class="text-danger">*</b></label>
+									<select class="form-control" name="featured" required id="banner-type">
+										<option value="1" @if(old('featured')=="1") selected @endif>Principal Superior</option>
+										<option value="2" @if(old('featured')=="2") selected @endif>Principal Alargado</option>
+										<option value="3" @if(old('featured')=="3") selected @endif>Principal Medio</option>
+										<option value="4" @if(old('featured')=="4") selected @endif>Principal Inferior</option>
 									</select>
 								</div>
 

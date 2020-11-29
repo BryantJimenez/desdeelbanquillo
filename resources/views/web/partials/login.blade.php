@@ -2,12 +2,23 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close close-auth" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
         <p class="h5 text-body text-center mt-2 mb-3">Ingresar a mi Cuenta</p>
 
-        @include('admin.partials.errors')
+        <div class="form-group col-12">
+          @include('admin.partials.errors')
+
+          @if(session('error.login'))
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <ul>
+              <li>{{ session('error.login') }}</li>
+            </ul>
+          </div>
+          @endif
+        </div>
 
         <div class="form-group col-12">
           <button type="submit" class="btn btn-facebook rounded text-white px-3 w-100">Continuar con Facebook</button>
@@ -18,7 +29,7 @@
             <hr>
           </div>
         </div>
-        <form action="{{ route('login') }}" method="POST" id="formLogin">
+        <form action="{{ route('login.custom') }}" method="POST" id="formLogin">
           {{ csrf_field() }}
           <div class="form-group col-12">
             <input class="form-control @error('email') is-invalid @enderror py-4 pl-1" type="email" name="email" required placeholder="Email" value="{{ old('email') }}">
@@ -31,7 +42,7 @@
               <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'class="checked"' : '' }}>
               <label class="text-body small mb-0" for="remember">Recordarme</label>
             </div>
-            <a href="javascript:void(0);">Olvidé mi contraseña</a>
+            <a href="javascript:void(0);" class="btn-recovery">Olvidé mi contraseña</a>
           </div>
           <div class="form-group col-12">
             <button type="submit" class="btn btn-primary rounded font-weight-bold text-white w-100" action="login">Ingresar</button>

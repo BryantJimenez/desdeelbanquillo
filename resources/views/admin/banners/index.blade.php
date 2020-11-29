@@ -54,7 +54,7 @@
 										</td>
 										<td>@empty($banner->url) Ninguna @else {{ $banner->url }} @endempty</td>
 										<td>{!! target($banner->target) !!}</td>
-										<td>{!! typeBanner($banner->type) !!}</td>
+										<td>{!! featuredBanner($banner->featured) !!}</td>
 										<td>{!! state($banner->state) !!}</td>
 										<td>
 											<div class="btn-group" role="group">

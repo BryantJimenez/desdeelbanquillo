@@ -141,6 +141,17 @@
   border-top-color: #d9b94a;
 }
 
+label.error {
+  width: 100%;
+  color: red;
+  font-weight: bold;
+  /*padding: .7em;*/
+  /*vertical-align: middle;*/
+  font-size: 12px;
+  /*border: 1px red solid;
+  border-top: none;*/
+}
+
 .square-image {
   height: 110px;
 }
@@ -214,11 +225,11 @@ a .card-text:hover, a .card-title:hover {
 }
 
 .dropdown-menu[aria-labelledby="navbarUser"] {
-    width: 150px;
-    left: unset !important;
-    right: 60px;
-    z-index: 1001;
-  }
+  width: 150px;
+  left: unset !important;
+  right: 60px;
+  z-index: 1001;
+}
 
 .btn.btn-facebook {
   background: #3b5998;
@@ -257,6 +268,18 @@ a .card-text:hover, a .card-title:hover {
   border: 1px solid #d20404;
 }
 
+.btn.btn-blue {
+  background: #2f3e9b;
+  border: 1px solid #2f3e9b;
+  color: #fff;
+}
+
+.tournament-buttons .btn.active, .tournament-buttons .btn:hover {
+  background: #2f3e9b !important;
+  border: 1px solid #2f3e9b !important;
+  color: #fff;
+}
+
 img.zoom {
   overflow: hidden;
   -webkit-transition: all .9s ease;
@@ -283,6 +306,10 @@ img.zoom:hover {
   border-bottom: 3px solid #f99c09;
 }
 
+.border-orange-dark {
+  border-bottom: 3px solid #ff6a04;
+}
+
 .title-principal-notice {
   font-family: 'Jost', sans-serif;
   font-size: 36px;
@@ -302,10 +329,42 @@ img.zoom:hover {
   font-family: Arial;
 }
 
-.gallery-image {
+.gallery-image, .galleries-image {
   width: 22%;
   margin-right: 1.5%;
   margin-left: 1.5%;
+}
+
+.galleries-image img {
+  height: 240px;
+}
+
+@media (max-width: 991px) {
+  .galleries-image img {
+    height: 160px;
+  }
+}
+
+@media(max-width: 720px) {
+  .galleries-image {
+    width: 30%;
+  }
+}
+
+@media(max-width: 580px) {
+  .galleries-image {
+    width: 46.5%;
+  }
+}
+
+@media(max-width: 425px) {
+  .galleries-image {
+    width: 97%;
+  }
+
+  .galleries-image img {
+    height: 200px;
+  }
 }
 
 .overlay-dark-gallery {
@@ -507,6 +566,15 @@ img.zoom:hover {
   color: #fff;
 }
 
+.pagination {
+  justify-content: center;
+}
+
+.page-item {
+  margin-left: .25rem;
+  margin-right: .25rem;
+}
+
 .page-item.active .page-link {
   background-color: transparent;
   color: #0b2ee4 !important;
@@ -517,7 +585,7 @@ img.zoom:hover {
   max-width: 390px;
 }
 
-#modal-login .close, #modal-register .close {
+#modal-login .close-auth, #modal-register .close-auth {
   opacity: 1;
   position: absolute;
   right: -30px;
@@ -553,6 +621,10 @@ img.zoom:hover {
   border-bottom: 1px solid #FAFAFA;
 }
 
+.brands_height {
+  height: 72px;
+}
+
 .banner_width_height {
   height: 93px;
 }
@@ -583,4 +655,104 @@ img.zoom:hover {
   .banner_bottom_height {
     height: unset;
   }
+}
+
+.image-news {
+  height: 315px;
+}
+
+@media (max-width: 1200px) {
+  .image-news {
+    height: 235px;
+  } 
+}
+
+label.error {
+  width: 100%;
+  color: red;
+  font-weight: bold;
+  /*padding: .7em;*/
+  /*vertical-align: middle;*/
+  font-size: 12px;
+  /*border: 1px red solid;
+  border-top: none;*/
+}
+
+.super-featured-first {
+  height: 500px;
+}
+
+.super-featured {
+  height: 245px;
+}
+
+@media (min-width: 1300px) {
+  .jssocials-share {
+    margin-top: 0px;
+  }
+}
+
+.futbol-dropdown {
+  width: 1000px;
+  height: 350px;
+  top: 50px;
+  overflow-y: scroll;
+  background-color: #222327;
+}
+
+.futbol-dropdown .line {
+  text-align: center;
+  width: 100%;
+}
+
+.futbol-dropdown .tournament-img {
+  margin-top: -25px;
+}
+
+.futbol-dropdown .line.line-top hr {
+  margin: -55px 0 25px 0;
+  z-index: -1;
+  position: relative;
+  border: 0;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.news-image img {
+  width: 75%;
+}
+
+@media (max-width: 991px) {
+  .futbol-dropdown {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .news-image img {
+    width: 100%;
+  }
+}
+
+.table-positions thead {
+  background-color: #2f3e9b;
+}
+
+.table-positions tbody td.text-left {
+  text-align: left !important;
+}
+
+.table-positions tbody tr:nth-of-type(even) {
+  background-color: rgba(255, 255, 67, 0.4);
+}
+
+@media (max-width: 600px) {
+  .table-positions {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+.border-left-blue {
+  border-left: 6px solid #2f3e9b !important;
 }

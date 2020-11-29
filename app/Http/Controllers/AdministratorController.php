@@ -112,6 +112,9 @@ class AdministratorController extends Controller
         if ($request->hasFile('photo')) {
             $file=$request->file('photo');
             $photo=$slug.".".$file->getClientOriginalExtension();
+            if (file_exists(public_path().'/admins/img/users/'.$photo)) {
+                unlink(public_path().'/admins/img/users/'.$photo);
+            }
             $file->move(public_path().'/admins/img/users/', $photo);
             $data['photo']=$photo;
         }

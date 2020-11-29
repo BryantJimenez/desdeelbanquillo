@@ -3,7 +3,9 @@
 @section('title', 'Editar Noticia')
 
 @section('links')
+<link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/select2/select2.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/admins/css/forms/switches.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/jquery-taginput/jquery.tagsinput.css') }}">
 <link rel="stylesheet" href="{{ asset('/admins/vendor/dropify/dropify.min.css') }}">
 <link href="{{ asset('/admins/vendor/sweetalerts/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/admins/vendor/sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css" />
@@ -58,32 +60,30 @@
 
 								<div class="form-group col-12">
 									<label class="col-form-label">Video (Opcional)</label>
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">https://www.youtube.com/watch?v=</span>
-										</div>
-										<input type="text" class="form-control" name="video" placeholder="FCcrB1ZXYQM" value="{{ $new->video }}">
-									</div>
+									<input type="text" class="form-control" name="video" placeholder="https://www.youtube.com/watch?v=FCcrB1ZXYQM" value="{{ $new->video }}">
+								</div>
+
+								<div class="form-group col-12">
+									<label class="col-form-label">Etiquetas<b class="text-danger">*</b></label>
+									<input type="text" class="form-control" name="tags" placeholder="Introduce etiquetas" value="@foreach($new->tags as $tag){{ $tag->name."," }}@endforeach" id="tags">
 								</div>
 
 								<div class="form-group col-xl-6 col-lg-6 col-md-6 col-12">
 									<label class="col-form-label">Desactivar/Activar Comentarios<b class="text-danger">*</b></label>
 									<div>
 										<label class="switch s-icons s-outline s-outline-primary mr-2">
-											<input type="checkbox" @if($new->state==1) checked @endif required value="1" id="commentCheckbox">
+											<input type="checkbox" @if($new->comment==1) checked @endif value="1" id="commentCheckbox">
 											<span class="slider round"></span>
-											<input type="hidden" name="comments" required value="@if($new->state==1) {{ "1" }} @else {{ "0" }} @endif" id="commentHidden">
+											<input type="hidden" name="comments" required value="@if($new->comment==1){{ "1" }}@else{{ "0" }}@endif" id="commentHidden">
 										</label>
 									</div>
 								</div>
 
 								<div class="form-group col-xl-6 col-lg-6 col-md-6 col-12">
 									<label class="col-form-label">Categoría<b class="text-danger">*</b></label>
-									<select class="form-control" name="category_id" required>
+									<select class="form-control select2" name="category_id[]" required multiple>
 										<option value="">Seleccione</option>
-										@foreach($categories as $category)
-										<option value="{{ $category->slug }}" @if($category->id==$new->category_id) selected @endif>{{ $category->name }}</option>
-										@endforeach
+										{!! selectArray($categories, $new->categories) !!}
 									</select>
 								</div>
 
@@ -91,9 +91,9 @@
 									<label class="col-form-label">Destacado (Opcional)</label>
 									<select class="form-control" name="featured">
 										<option value="">Seleccione</option>
-										<option value="1" @if($new->type=="1") selected @endif>Súper Destacado</option>
-										<option value="2" @if($new->type=="2") selected @endif>Destacado Principal</option>
-										<option value="3" @if($new->type=="3") selected @endif>Destacado Secundario</option>
+										<option value="1" @if($new->featured=="1") selected @endif>Súper Destacado</option>
+										<option value="2" @if($new->featured=="2") selected @endif>Destacado Principal</option>
+										<option value="3" @if($new->featured=="3") selected @endif>Destacado Secundario</option>
 									</select>
 								</div>
 
@@ -101,7 +101,7 @@
 									<label class="col-form-label">Estado<b class="text-danger">*</b></label>
 									<select class="form-control" name="state" required>
 										<option value="1" @if($new->state=="1") selected @endif>Publicado</option>
-										<option value="3" @if($new->state=="2") selected @endif>Borrador</option>
+										<option value="2" @if($new->state=="2") selected @endif>Borrador</option>
 									</select>
 								</div>
 
@@ -125,7 +125,9 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('/admins/vendor/select2/select2.min.js') }}"></script>
 <script src="{{ asset('/admins/vendor/dropify/dropify.min.js') }}"></script>
+<script src="{{ asset('/admins/vendor/jquery-taginput/jquery.tagsinput.js') }}"></script>
 <script src="{{ asset('/admins/vendor/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/jquery.validate.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/additional-methods.js') }}"></script>

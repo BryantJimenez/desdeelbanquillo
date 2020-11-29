@@ -44,15 +44,21 @@ function typeUser($type, $badge=1) {
 	}
 }
 
-function typeBanner($type) {
-	if ($type==1) {
+function featuredBanner($featured) {
+	if ($featured==1) {
 		return '<span class="badge badge-primary">Principal Superior</span>';
-	} elseif ($type==2) {
+	} elseif ($featured==2) {
 		return '<span class="badge badge-primary">Principal Alargado</span>';
-	} elseif ($type==3) {
+	} elseif ($featured==3) {
 		return '<span class="badge badge-primary">Principal Medio</span>';
-	} elseif ($type==4) {
+	} elseif ($featured==4) {
 		return '<span class="badge badge-primary">Principal Inferior</span>';
+	} elseif ($featured==5) {
+		return '<span class="badge badge-primary">Noticia Superior</span>';
+	} elseif ($featured==6) {
+		return '<span class="badge badge-primary">Noticia Alargado</span>';
+	} elseif ($featured==7) {
+		return '<span class="badge badge-primary">Noticia Inferior</span>';
 	} else {
 		return '<span class="badge badge-dark">Desconocido</span>';
 	}
@@ -127,6 +133,53 @@ function submenu($path, $action=null) {
 	}
 }
 
+function selectArray($arrays, $selectedItems) {
+	$selects="";
+	foreach ($arrays as $array) {
+		$select="";
+		if (count($selectedItems)>0) {
+			foreach ($selectedItems as $selected) {
+				if (is_object($selected) && $selected->slug==$array->slug) {
+					$select="selected";
+					break;
+				} elseif ($selected==$array->slug) {
+					$select="selected";
+					break;
+				}
+			}
+		}
+		$selects.='<option value="'.$array->slug.'" '.$select.'>'.$array->name.'</option>';
+	}
+	return $selects;
+}
+
+function store_files($file, $file_name, $route) {
+	$image=$file_name.".".$file->getClientOriginalExtension();
+	if (file_exists(public_path().$route.$image)) {
+		unlink(public_path().$route.$image);
+	}
+	$file->move(public_path().$route, $image);
+	return $image;
+}
+
+function image_exist($file_route, $image, $user_image=false, $large=true) {
+	if (file_exists(public_path().$file_route.$image)) {
+		$img=asset($file_route.$image);
+	} else {
+		if ($user_image) {
+			$img=asset("/admins/img/template/usuario.png");
+		} else {
+			if ($large) {
+				$img=asset("/admins/img/template/imagen.jpg");
+			} else {
+				$img=asset("/admins/img/template/image.jpg");
+			}
+		}
+	}
+
+	return $img;
+}
+
 function target($target) {
 	if ($target==1) {
 		return "En la misma Pestaña";
@@ -135,4 +188,26 @@ function target($target) {
 	} else {
 		return "Ninguno";
 	}
+}
+
+function featured($featured) {
+	if ($featured==1) {
+		return '<span class="badge badge-primary">Si</span>';
+	} elseif ($featured==0) {
+		return '<span class="badge badge-danger">No</span>';
+	} else {
+		return '<span class="badge badge-dark">Desconocido</span>';
+	}
+}
+
+function youtubeUrl($url) {
+	$url_new=substr($url, 32);
+	if (is_numeric(strpos($url_new, '&'))) {
+		$end=strpos($url_new, '&');
+		$youtube=substr($url_new, 0, $end);
+	} else {
+		$youtube=substr($url, 32);
+	}
+
+	return "https://www.youtube.com/embed/".$youtube;
 }

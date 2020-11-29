@@ -43,19 +43,31 @@
 								</div>
 
 								<div class="form-group col-12">
-									<label class="col-form-label">Tipo<b class="text-danger">*</b></label>
-									<select class="form-control" name="type" required>
+									<label class="col-form-label">Destacado<b class="text-danger">*</b></label>
+									<select class="form-control" name="featured" required id="banner-type">
 										<option value="">Seleccione</option>
-										<option value="1" @if($banner->type=="1") selected @endif>Principal Grande Superior</option>
-										<option value="2" @if($banner->type=="2") selected @endif>Principal Alargado</option>
-										<option value="3" @if($banner->type=="3") selected @endif>Principal Medio</option>
-										<option value="4" @if($banner->type=="4") selected @endif>Principal Inferior</option>
+										<option value="1" @if($banner->featured=="1") selected @endif>Principal Grande Superior</option>
+										<option value="2" @if($banner->featured=="2") selected @endif>Principal Alargado</option>
+										<option value="3" @if($banner->featured=="3") selected @endif>Principal Medio</option>
+										<option value="4" @if($banner->featured=="4") selected @endif>Principal Inferior</option>
 									</select>
 								</div>
 
 								<div class="form-group col-12">
 									<label class="col-form-label">Imagen<b class="text-danger">*</b></label>
 									<input type="file" name="image" accept="image/*" id="input-file-now" class="dropify" data-height="125" data-max-file-size="20M" data-allowed-file-extensions="jpg png jpeg web3" data-default-file="{{ '/admins/img/banners/'.$banner->image }}" />
+									@if($banner->featured=="1")
+									<span class="badge badge-primary mt-1"><small class="form-text mt-0" id="text-image-size">La imagen debe tener un tamaño de 1410px de ancho y 500px de alto</small></span>
+									@elseif($banner->featured=="2")
+									<span class="badge badge-primary mt-1"><small class="form-text mt-0" id="text-image-size">La imagen debe tener un tamaño de 1410px de ancho y 93px de alto</small></span>
+									@elseif($banner->featured=="3")
+									<span class="badge badge-primary mt-1"><small class="form-text mt-0" id="text-image-size">La imagen debe tener un tamaño de 330px de ancho y 360px de alto</small></span>
+									@elseif($banner->featured=="4")
+									<span class="badge badge-primary mt-1"><small class="form-text mt-0" id="text-image-size">La imagen debe tener un tamaño de 690px de ancho y 210px de alto</small></span>
+									@else
+									<span class="badge badge-primary mt-1"><small class="form-text mt-0" id="text-image-size">La imagen debe tener un tamaño de XXXX de ancho y XXXX de alto</small></span>
+									@endif
+									
 								</div>
 
 								<div class="form-group col-12">

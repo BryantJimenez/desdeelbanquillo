@@ -1,6 +1,6 @@
 @extends('layouts.web')
 
-@section('title', 'Inicio')
+@section('title', 'Desde el Banquillo')
 
 @section('links')
 <!-- Lightgallery -->
@@ -47,68 +47,41 @@
 </section>
 @endif
 
+@if(count($super_featured)>0)
 <section class="ftco-section py-0">
     <div class="container bg-white py-1">
         <div class="row">
 
             <div class="col-lg-6 col-12 py-1">
-                <a href="#" class="card bg-dark text-white border-0 rounded-0 overflow-hidden">
-                    <img src="{{ asset('/web/img/noticia1de5.png') }}" class="card-img zoom" alt="Noticia">
+                <a href="{{ route('new', ['category' => $super_featured[0]->categories[0]->slug, 'slug' => $super_featured[0]->slug]) }}" class="card bg-dark text-white border-0 rounded-0 overflow-hidden">
+                    <img src="{{ asset('/admins/img/news/'.$super_featured[0]->image) }}" class="card-img super-featured-first zoom" alt="{{ $super_featured[0]->title }}">
                     <div class="card-img-overlay abosulute-top-unset overlay-dark px-3 py-1">
-                        <h4 class="card-text title-principal-notice text-white font-weight-bold mb-0">Real Sociedad se hizo respetar en la última etapa y cambio el fixture en un interesante partido</h4>
-                        <p class="card-text text-right font-jost">1 día <i class="fa fa-clock-o ml-2"></i></p>
+                        <h4 class="card-text title-principal-notice text-white font-weight-bold">{{ $super_featured[0]->title }}</h4>
                     </div>
                 </a>
             </div>
 
             <div class="col-lg-6 col-12">
                 <div class="row">
-
-                    <div class="col-lg-6 col-md-6 col-12 py-1 pr-md-1 pr-lg-1 pr-xl-1">
-                        <a href="#" class="card bg-dark text-white border-0 rounded-0 overflow-hidden">
-                            <img src="{{ asset('/web/img/noticia2de5.png') }}" class="card-img zoom" alt="Noticia">
+                    @foreach($super_featured as $featured)
+                    @if($loop->index!=0)
+                    <div class="col-lg-6 col-md-6 col-12 py-1">
+                        <a href="{{ route('new', ['category' => $featured->categories[0]->slug, 'slug' => $featured->slug]) }}" class="card bg-dark text-white border-0 rounded-0 overflow-hidden">
+                            <img src="{{ asset('/admins/img/news/'.$featured->image) }}" class="card-img super-featured zoom" alt="{{ $featured->title }}">
                             <div class="card-img-overlay abosulute-top-unset overlay-dark px-2 pt-2 pb-1">
-                                <p class="card-text title-secondary-notice ln-sm mb-0">El Nápoles, festeja y va directo a la Final de la Copa</p>
-                                <p class="card-text text-right font-jost">1 día <i class="fa fa-clock-o ml-2"></i></p>
+                                <p class="card-text title-secondary-notice ln-sm">{{ $featured->title }}</p>
                             </div>
                         </a>
                     </div>
-
-                    <div class="col-lg-6 col-md-6 col-12 py-1 pl-md-1 pl-lg-1 pl-xl-1">
-                        <a href="#" class="card bg-dark text-white border-0 rounded-0 overflow-hidden">
-                            <img src="{{ asset('/web/img/noticia3de5.png') }}" class="card-img zoom" alt="Noticia">
-                            <div class="card-img-overlay abosulute-top-unset overlay-dark px-2 pt-2 pb-1">
-                                <p class="card-text title-secondary-notice ln-sm mb-0">El Universitario FC anuncia el compromiso del entrenador Carlos Marín Lópezes</p>
-                                <p class="card-text text-right font-jost">3 días <i class="fa fa-clock-o ml-2"></i></p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-12 py-1 pr-md-1 pr-lg-1 pr-xl-1">
-                        <a href="#" class="card bg-dark text-white border-0 rounded-0 overflow-hidden">
-                            <img src="{{ asset('/web/img/noticia4de5.png') }}" class="card-img zoom" alt="Noticia">
-                            <div class="card-img-overlay abosulute-top-unset overlay-dark px-2 pt-2 pb-1">
-                                <p class="card-text title-secondary-notice ln-sm mb-0">Un gol que lo cambio todo...</p>
-                                <p class="card-text text-right font-jost">2 días <i class="fa fa-clock-o ml-2"></i></p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-12 py-1 pl-md-1 pl-lg-1 pl-xl-1">
-                        <a href="#" class="card bg-dark text-white border-0 rounded-0 overflow-hidden">
-                            <img src="{{ asset('/web/img/noticia5de5.png') }}" class="card-img zoom" alt="Noticia">
-                            <div class="card-img-overlay abosulute-top-unset overlay-dark px-2 pt-2 pb-1">
-                                <p class="card-text title-secondary-notice ln-sm mb-0">Una nueva Generación de Campeones</p>
-                                <p class="card-text text-right font-jost">3 días <i class="fa fa-clock-o ml-2"></i></p>
-                            </div>
-                        </a>
-                    </div>
+                    @endif
+                    @endforeach
                 </div>
             </div>
 
         </div>
     </div>
 </section>
+@endif
 
 @if(!empty($banner_width))
 <section class="ftco-section py-0">
@@ -134,6 +107,7 @@
                     <div class="col-12 heading-section text-left d-flex justify-content-between pb-1">
                         <p class="h6 text-dark font-weight-bold text-uppercase border-left-red m-0"> Últimos Resultados </p>
                         <span class="controls-last-results d-flex justify-content-between">
+                            @if(count($matches)>1)
                             <a class="carousel-control-prev" href="#carousel-2" role="button" data-slide="prev">
                                 <span class="fa fa-angle-left" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
@@ -142,6 +116,7 @@
                                 <span class="fa fa-angle-right" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
+                            @endif
                         </span>
                     </div>
 
@@ -149,108 +124,39 @@
                         <hr class="mb-3 mt-1">
                         <div id="carousel-2" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
+                                @foreach($matches as $match)
+                                <div class="carousel-item @if($loop->index==0) active @endif">
+                                    @foreach($match as $result)
                                     <div class="card rounded-bottom rounded-top-0 border-orange mb-2">
-                                        <div class="card-body py-xxl-4 py-2">
+                                        <div class="card-body py-xxl-4 py-1">
                                             <div class="row">
+                                                <div class="col-12">
+                                                    <p class="text-center text-muted font-weight-bold small font-size-10 mb-0">{{ $result->day->tournament->title }}</p>
+                                                </div>
                                                 <div class="col-4 pl-lg-1 pr-lg-0 d-flex justify-content-center flex-column">
-                                                    <img src="{{ asset('/web/img/escudo1.png') }}" class="border mx-auto p-2" width="60" height="60">
-                                                    <p class="text-center text-dark font-weight-bold small mb-0">Barcelona</p>
+                                                    <img src="{{ asset('/admins/img/teams/'.$result->teams[0]->shield) }}" class="border mx-auto p-1" width="60" height="60" alt="{{ $result->teams[0]->name }}">
+                                                    <p class="text-center text-dark font-weight-bold small mb-0">{{ $result->teams[0]->name }}</p>
                                                 </div>
                                                 <div class="col-4 px-0">
                                                     <p class="h2 font-weight-bold d-flex justify-content-between pt-2">
-                                                        <span>1</span>
+                                                        <span>@if(!is_null($result->teams[0]->pivot->goals)){{ $result->teams[0]->pivot->goals }}@else{{ "-" }}@endif</span>
                                                         <span>-</span>
-                                                        <span>0</span>
+                                                        <span>@if(!is_null($result->teams[1]->pivot->goals)){{ $result->teams[1]->pivot->goals }}@else{{ "-" }}@endif</span>
                                                     </p>
                                                 </div>
                                                 <div class="col-4 pl-lg-1 pr-lg-0 d-flex justify-content-center flex-column">
-                                                    <img src="{{ asset('/web/img/escudo2.png') }}" class="border mx-auto p-2" width="60" height="60">
-                                                    <p class="text-center text-dark font-weight-bold small mb-0">Mallorca</p>
+                                                    <img src="{{ asset('/admins/img/teams/'.$result->teams[1]->shield) }}" class="border mx-auto p-1" width="60" height="60" alt="{{ $result->teams[1]->name }}">
+                                                    <p class="text-center text-dark font-weight-bold small mb-0">{{ $result->teams[1]->name }}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-footer bg-white p-1">
-                                            <p class="text-center text-muted font-weight-bold small font-size-10 mb-0">Estadio: Bella Italia / 14 de Junio, 2020</p>
+                                        <div class="card-footer bg-white p-0">
+                                            <p class="text-center text-muted font-weight-bold small font-size-10 mb-0">Estadio: {{ $result->stadium->name }} / {{ date('d-m-Y', strtotime($result->date)) }}</p>
                                         </div>
                                     </div>
-
-                                    <div class="card rounded-bottom rounded-top-0 border-orange mb-2">
-                                        <div class="card-body py-xxl-4 py-2">
-                                            <div class="row">
-                                                <div class="col-4 pl-lg-1 pr-lg-0 d-flex justify-content-center flex-column">
-                                                    <img src="{{ asset('/web/img/escudo1.png') }}" class="border mx-auto p-2" width="60" height="60">
-                                                    <p class="text-center text-dark font-weight-bold small mb-0">Barcelona</p>
-                                                </div>
-                                                <div class="col-4 px-0">
-                                                    <p class="h2 font-weight-bold d-flex justify-content-between pt-2">
-                                                        <span>1</span>
-                                                        <span>-</span>
-                                                        <span>0</span>
-                                                    </p>
-                                                </div>
-                                                <div class="col-4 pl-lg-1 pr-lg-0 d-flex justify-content-center flex-column">
-                                                    <img src="{{ asset('/web/img/escudo2.png') }}" class="border mx-auto p-2" width="60" height="60">
-                                                    <p class="text-center text-dark font-weight-bold small font-size-10 mb-0">Mallorca</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer bg-white p-1">
-                                            <p class="text-center text-muted font-weight-bold small font-size-10 mb-0">Estadio: Bella Italia / 14 de Junio, 2020</p>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="card rounded-bottom rounded-top-0 border-orange mb-2">
-                                        <div class="card-body py-xxl-4 py-2">
-                                            <div class="row">
-                                                <div class="col-4 pl-lg-1 pr-lg-0 d-flex justify-content-center flex-column">
-                                                    <img src="{{ asset('/web/img/escudo1.png') }}" class="border mx-auto p-2" width="60" height="60">
-                                                    <p class="text-center text-dark font-weight-bold small mb-0">Barcelona</p>
-                                                </div>
-                                                <div class="col-4 px-0">
-                                                    <p class="h2 font-weight-bold d-flex justify-content-between pt-2">
-                                                        <span>1</span>
-                                                        <span>-</span>
-                                                        <span>0</span>
-                                                    </p>
-                                                </div>
-                                                <div class="col-4 pl-lg-1 pr-lg-0 d-flex justify-content-center flex-column">
-                                                    <img src="{{ asset('/web/img/escudo2.png') }}" class="border mx-auto p-2" width="60" height="60">
-                                                    <p class="text-center text-dark font-weight-bold small mb-0">Mallorca</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer bg-white p-1">
-                                            <p class="text-center text-muted font-weight-bold small font-size-10 mb-0">Estadio: Bella Italia / 14 de Junio, 2020</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="card rounded-bottom rounded-top-0 border-orange mb-2">
-                                        <div class="card-body py-xxl-4 py-2">
-                                            <div class="row">
-                                                <div class="col-4 pl-lg-1 pr-lg-0 d-flex justify-content-center flex-column">
-                                                    <img src="{{ asset('/web/img/escudo1.png') }}" class="border mx-auto p-2" width="60" height="60">
-                                                    <p class="text-center text-dark font-weight-bold small mb-0">Barcelona</p>
-                                                </div>
-                                                <div class="col-4 px-0">
-                                                    <p class="h2 font-weight-bold d-flex justify-content-between pt-2">
-                                                        <span>1</span>
-                                                        <span>-</span>
-                                                        <span>0</span>
-                                                    </p>
-                                                </div>
-                                                <div class="col-4 pl-lg-1 pr-lg-0 d-flex justify-content-center flex-column">
-                                                    <img src="{{ asset('/web/img/escudo2.png') }}" class="border mx-auto p-2" width="60" height="60">
-                                                    <p class="text-center text-dark font-weight-bold small font-size-10 mb-0">Mallorca</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer bg-white p-1">
-                                            <p class="text-center text-muted font-weight-bold small font-size-10 mb-0">Estadio: Bella Italia / 14 de Junio, 2020</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -264,81 +170,25 @@
                         <p class="h6 text-dark font-weight-bold text-uppercase border-left-blue m-0"> Noticias Destacadas</p>
                     </div>
 
+                    @foreach($featureds as $featured)
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12 pt-1">
-                        <div class="card card-horizontal border-bottom-0 border-left-0 border-right-0 border-primary rounded-0 pt-2">
+                        <div class="card card-horizontal @if($loop->index==0) border-bottom-0 border-left-0 border-right-0 @elseif($loop->index==1) border-bottom-0 border-left-0 border-right-0 border-primary @elseif($loop->index==2) border-left-0 border-right-0 border-bottom-sm-0 border-primary @elseif($loop->index==3) border-left-0 border-right-0 border-primary @endif border-primary rounded-0 pt-2">
                             <div class="row no-gutters">
                                 <div class="col-lg-6 col-md-7 col-8">
                                     <div class="card-body px-0 py-1">
-                                        <a href="#"><h5 class="card-title ln-sm mb-1">Ronaldo y Messi vuelven a las canchas en los tiempos del COVID-19</h5></a>
+                                        <a href="{{ route('new', ['category' => $featured->categories[0]->slug, 'slug' => $featured->slug]) }}"><h5 class="card-title ln-sm mb-1">{{ $featured->title }}</h5></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-5 col-4 overflow-hidden">
-                                    <a href="#"><img src="{{ asset('/web/img/noticiadestacada1de4.png') }}" class="w-100 square-image zoom" alt="Noticia"></a>
+                                    <a href="{{ route('new', ['category' => $featured->categories[0]->slug, 'slug' => $featured->slug]) }}"><img src="{{ asset('/admins/img/news/'.$featured->image) }}" class="w-100 square-image zoom" alt="{{ $featured->title }}"></a>
                                 </div>
                             </div>
-                            <p class="card-text d-flex justify-content-between mt-2">
-                                <small class="text-dark">1 día <i class="fa fa-clock-o"></i></small>
-                                <small class="text-dark">4 Comentarios <i class="fa fa-comment-o"></i></small>
+                            <p class="card-text d-flex justify-content-end mt-2">
+                                <small class="text-dark">{{ count($featured->comments) }} Comentarios <i class="fa fa-comment-o"></i></small>
                             </p>
                         </div>
                     </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-12 pt-1">
-                        <div class="card card-horizontal border-bottom-0 border-left-0 border-right-0 border-primary rounded-0 pt-2">
-                            <div class="row no-gutters">
-                                <div class="col-lg-6 col-md-7 col-8">
-                                    <div class="card-body px-0 py-1">
-                                        <a href="#"><h5 class="card-title ln-sm mb-1">Nuevamente el talento femenino se apodero del Clásico</h5></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-5 col-4 overflow-hidden">
-                                    <a href="#"><img src="{{ asset('/web/img/noticiadestacada2de4.png') }}" class="w-100 square-image zoom" alt="Noticia"></a>
-                                </div>
-                            </div>
-                            <p class="card-text d-flex justify-content-between mt-2">
-                                <small class="text-dark">1 día <i class="fa fa-clock-o"></i></small>
-                                <small class="text-dark">4 Comentarios <i class="fa fa-comment-o"></i></small>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-12 pt-1">
-                        <div class="card card-horizontal border-left-0 border-right-0 border-bottom-sm-0 border-primary rounded-0 pt-2">
-                            <div class="row no-gutters">
-                                <div class="col-lg-6 col-md-7 col-8">
-                                    <div class="card-body px-0 py-1">
-                                        <a href="#"><h5 class="card-title ln-sm mb-1">Mallorca derrota 1 a 0 a Barcelona</h5></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-5 col-4 overflow-hidden">
-                                    <a href="#"><img src="{{ asset('/web/img/noticiadestacada3de4.png') }}" class="w-100 square-image zoom" alt="Noticia"></a>
-                                </div>
-                            </div>
-                            <p class="card-text d-flex justify-content-between mt-2">
-                                <small class="text-dark">1 día <i class="fa fa-clock-o"></i></small>
-                                <small class="text-dark">4 Comentarios <i class="fa fa-comment-o"></i></small>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-12 pt-1">
-                        <div class="card card-horizontal border-left-0 border-right-0 border-primary rounded-0 pt-2">
-                            <div class="row no-gutters">
-                                <div class="col-lg-6 col-md-7 col-8">
-                                    <div class="card-body px-0 py-1">
-                                        <a href="#"><h5 class="card-title ln-sm mb-1">Siete curiosidades del estadio Alfredo Di Stéfano</h5></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-5 col-4 overflow-hidden">
-                                    <a href="#"><img src="{{ asset('/web/img/noticiadestacada4de4.png') }}" class="w-100 square-image zoom" alt="Noticia"></a>
-                                </div>
-                            </div>
-                            <p class="card-text d-flex justify-content-between mt-2">
-                                <small class="text-dark">1 día <i class="fa fa-clock-o"></i></small>
-                                <small class="text-dark">4 Comentarios <i class="fa fa-comment-o"></i></small>
-                            </p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -355,6 +205,7 @@
     </div>
 </section>
 
+@if(count($videos)>0)
 <section class="ftco-section py-0">
     <div class="container bg-white pt-3">
         <div class="row justify-content-center pb-3">
@@ -365,53 +216,39 @@
     </div>
     <div class="container bg-white pb-1">
         <div class="row">
+            @foreach($videos as $video)
             <div class="col-lg-6 col-12">
-                <iframe class="w-100" height="320" src="https://www.youtube.com/embed/Y-NeVAOkMlI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="w-100" height="320" src="{{ youtubeUrl($video->video) }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div class="col-lg-6 col-12">
-                <iframe class="w-100" height="320" src="https://www.youtube.com/embed/FCcrB1ZXYQM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
+@endif
 
 <section class="ftco-section py-0">
     <div class="container bg-white py-1">
         <div class="row">
             <div class="col-lg-6 col-12">
                 <div class="row px-3 pb-3">
+                    @foreach($bottom_featured as $featured)
                     <div class="col-12 pt-2 px-2 bg-light-grey">
-                        <div class="card card-horizontal rounded-0 mb-3">
+                        <div class="card card-horizontal rounded-0 mb-2">
                             <div class="row no-gutters">
                                 <div class="col-lg-6 col-md-4 col-12 overflow-hidden">
-                                    <a href="#"><img src="{{ asset('/web/img/noticia1de5.png') }}" class="h-100 w-100 zoom" alt="Noticia"></a>
+                                    <a href="{{ route('new', ['category' => $featured->categories[0]->slug, 'slug' => $featured->slug]) }}"><img src="{{ asset('/admins/img/news/'.$featured->image) }}" class="h-100 w-100 zoom" alt="{{ $featured->title }}"></a>
                                 </div>
                                 <div class="col-lg-6 col-md-8 col-12">
                                     <div class="card-body">
-                                        <a href="#"><h5 class="card-title font-weight-bold text-uppercase mb-1">Zidane: "We're not going to change the way we play at the calderón"</h5></a>
-                                        <p class="card-text border-bottom pb-3"><small class="text-muted font-weight-bold text-uppercase"><span class="badge badge-danger mr-2">Hot <i class="fa fa-fire"></i></span> <i class="fa fa-clock-o"></i> April 15, 2020</small></p>
-                                        <p class="card-text text-description">Zidane spoke to the media at the Real Madrid City. The Whites coach explained how the team is going in to the second leg of the Champions...</p>
+                                        <a href="{{ route('new', ['category' => $featured->categories[0]->slug, 'slug' => $featured->slug]) }}"><h5 class="card-title font-weight-bold text-uppercase mb-1">{{ $featured->title }}</h5></a>
+                                        <p class="card-text border-bottom pb-3"><small class="text-muted font-weight-bold text-uppercase"><span class="badge badge-success mr-2">{{ $featured->categories[0]->name }}</span> <i class="fa fa-clock-o"></i> {{ $featured->created_at->toFormattedDateString() }}</small></p>
+                                        <p class="card-text text-description">@if(strlen($featured->summary)>135){{ substr($featured->summary, 0, 135)."..." }}@else{{ $featured->summary }}@endif</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 px-2 bg-light-grey">
-                        <div class="card card-horizontal rounded-0 mb-2">
-                            <div class="row no-gutters">
-                                <div class="col-lg-6 col-md-4 col-12 overflow-hidden">
-                                    <a href="#"><img src="{{ asset('/web/img/noticia1de5.png') }}" class="h-100 w-100 zoom" alt="Noticia"></a>
-                                </div>
-                                <div class="col-lg-6 col-md-8 col-12">
-                                    <div class="card-body">
-                                        <a href="#"><h5 class="card-title font-weight-bold text-uppercase mb-1">NFL will handle referee Pete Morelli's use of profanity internally</h5></a>
-                                        <p class="card-text border-bottom pb-3"><small class="text-muted font-weight-bold text-uppercase"><span class="badge badge-success mr-2">The League</span> <i class="fa fa-clock-o"></i> April 15, 2020</small></p>
-                                        <p class="card-text text-description">The NFL will internally address referee Pete Morelli's recent microphone gaffe, a league spokesman said, but it does not appear Morelli...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
+                    @endforeach
                 </div>
             </div>
 
@@ -422,38 +259,12 @@
 
                         <div class="row">
                             <div class="col-12 d-flex flex-wrap justify-content-between" id="lightgallery">
-                                <a href="{{ asset('/web/img/fotogaleria1.png') }}" class="gallery-image overflow-hidden position-relative mb-3">
-                                    <img src="{{ asset('/web/img/fotogaleria1.png') }}" class="w-100" alt="Noticia">
+                                @foreach($galleries as $gallery)
+                                <a href="{{ asset('/admins/img/galleries/'.$gallery->image) }}" class="gallery-image overflow-hidden position-relative mb-3">
+                                    <img src="{{ asset('/admins/img/galleries/'.$gallery->image) }}" class="w-100" alt="{{ $gallery->title }}">
                                     <div class="overlay-dark-gallery text-white d-flex justify-content-center"><i class="fa fa-search"></i></div>
                                 </a>
-                                <a href="{{ asset('/web/img/fotogaleria1.png') }}" class="gallery-image overflow-hidden position-relative mb-3">
-                                    <img src="{{ asset('/web/img/fotogaleria1.png') }}" class="w-100" alt="Noticia">
-                                    <div class="overlay-dark-gallery text-white d-flex justify-content-center"><i class="fa fa-search"></i></div>
-                                </a>
-                                <a href="{{ asset('/web/img/fotogaleria1.png') }}" class="gallery-image overflow-hidden position-relative mb-3">
-                                    <img src="{{ asset('/web/img/fotogaleria1.png') }}" class="w-100" alt="Noticia">
-                                    <div class="overlay-dark-gallery text-white d-flex justify-content-center"><i class="fa fa-search"></i></div>
-                                </a>
-                                <a href="{{ asset('/web/img/fotogaleria1.png') }}" class="gallery-image overflow-hidden position-relative mb-3">
-                                    <img src="{{ asset('/web/img/fotogaleria1.png') }}" class="w-100" alt="Noticia">
-                                    <div class="overlay-dark-gallery text-white d-flex justify-content-center"><i class="fa fa-search"></i></div>
-                                </a>
-                                <a href="{{ asset('/web/img/fotogaleria1.png') }}" class="gallery-image overflow-hidden position-relative mb-3">
-                                    <img src="{{ asset('/web/img/fotogaleria1.png') }}" class="w-100" alt="Noticia">
-                                    <div class="overlay-dark-gallery text-white d-flex justify-content-center"><i class="fa fa-search"></i></div>
-                                </a>
-                                <a href="{{ asset('/web/img/fotogaleria1.png') }}" class="gallery-image overflow-hidden position-relative mb-3">
-                                    <img src="{{ asset('/web/img/fotogaleria1.png') }}" class="w-100" alt="Noticia">
-                                    <div class="overlay-dark-gallery text-white d-flex justify-content-center"><i class="fa fa-search"></i></div>
-                                </a>
-                                <a href="{{ asset('/web/img/fotogaleria1.png') }}" class="gallery-image overflow-hidden position-relative mb-3">
-                                    <img src="{{ asset('/web/img/fotogaleria1.png') }}" class="w-100" alt="Noticia">
-                                    <div class="overlay-dark-gallery text-white d-flex justify-content-center"><i class="fa fa-search"></i></div>
-                                </a>
-                                <a href="{{ asset('/web/img/fotogaleria1.png') }}" class="gallery-image overflow-hidden position-relative mb-3">
-                                    <img src="{{ asset('/web/img/fotogaleria1.png') }}" class="w-100" alt="Noticia">
-                                    <div class="overlay-dark-gallery text-white d-flex justify-content-center"><i class="fa fa-search"></i></div>
-                                </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>

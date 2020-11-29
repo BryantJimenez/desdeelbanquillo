@@ -47,10 +47,12 @@
 										<td>{{ $num++ }}</td>
 										<td>{{ $category->name }}</td>
 										<td>
+											@if($category->slug!="entrevistas" && $category->slug!="premios-deb" && $category->slug!="e-sport")
 											<div class="btn-group" role="group">
 												<a href="{{ route('categorias.edit', ['slug' => $category->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Editar"><i class="fa fa-edit"></i></a>
 												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Eliminar" onclick="deleteCategory('{{ $category->slug }}')"><i class="fa fa-trash"></i></button>
 											</div>
+											@endif
 										</td>
 									</tr>
 									@endforeach

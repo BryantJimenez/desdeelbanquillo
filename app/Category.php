@@ -9,6 +9,6 @@ class Category extends Model
     protected $fillable = ['name', 'slug'];
 
     public function news() {
-        return $this->hasMany(News::class);
+        return $this->belongsToMany(News::class)->withTimestamps();
     }
 }

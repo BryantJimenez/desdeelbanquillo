@@ -38,7 +38,7 @@
 									<tr>
 										<th>#</th>
 										<th>Título</th>
-										<th>Categoría</th>
+										<th>Categorías</th>
 										<th>Estado</th>
 										<th>Acciones</th>
 									</tr>
@@ -48,11 +48,23 @@
 									<tr>
 										<td>{{ $num++ }}</td>
 										<td>{{ $new->title }}</td>
-										<td>{{ $new->category->name }}</td>
+										<td>
+											@foreach($new->categories as $category)
+											{{ $category->name }}
+											@if(!$loop->last)
+											<br>
+											@endif
+											@endforeach
+										</td>
 										<td>{!! stateNew($new->state) !!}</td>
 										<td>
 											<div class="btn-group" role="group">
 												<a href="{{ route('noticias.edit', ['slug' => $new->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+												@if($new->state==1)
+												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Desactivar" onclick="deactiveNew('{{ $new->slug }}')"><i class="fa fa-power-off"></i></button>
+												@else
+												<button type="button" class="btn btn-success btn-sm bs-tooltip" title="Activar" onclick="activeNew('{{ $new->slug }}')"><i class="fa fa-check"></i></button>
+												@endif
 												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Eliminar" onclick="deleteNew('{{ $new->slug }}')"><i class="fa fa-trash"></i></button>
 											</div>
 										</td>
@@ -68,6 +80,48 @@
 		</div>
 	</div>
 
+</div>
+
+<div class="modal fade" id="deactiveNew" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">¿Estás seguro de que quieres desactivar esta noticia?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+				<form action="#" method="POST" id="formDeactiveNew">
+					@csrf
+					@method('PUT')
+					<button type="submit" class="btn btn-primary">Desactivar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="activeNew" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">¿Estás seguro de que quieres activar esta noticia?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+				<form action="#" method="POST" id="formActiveNew">
+					@csrf
+					@method('PUT')
+					<button type="submit" class="btn btn-primary">Activar</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="modal fade" id="deleteNew" tabindex="-1" role="dialog" aria-hidden="true">

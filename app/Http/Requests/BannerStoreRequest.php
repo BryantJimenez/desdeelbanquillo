@@ -27,7 +27,7 @@ class BannerStoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string|min:2|max:191',
-            'type' => 'required|'.Rule::in([1, 2, 3, 4]),
+            'featured' => 'required|'.Rule::in([1, 2, 3, 4]),
             'image' => 'required|file|mimetypes:image/*',
             'pre_url' => 'required|'.Rule::in(['http://', 'https://']),
             'url' => 'nullable|string|min:3|max:191',

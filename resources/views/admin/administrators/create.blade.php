@@ -40,12 +40,12 @@
 									<div class="row">
 										<div class="form-group col-lg-12 col-md-12 col-12">
 											<label class="col-form-label">Nombre<b class="text-danger">*</b></label>
-											<input class="form-control" type="text" name="name" required placeholder="Introduzca un nombre" value="{{ old('name') }}" id="name">
+											<input class="form-control" type="text" name="name" required placeholder="Introduzca un nombre" value="{{ old('name') }}">
 										</div>
 
 										<div class="form-group col-lg-12 col-md-12 col-12">
 											<label class="col-form-label">Apellido<b class="text-danger">*</b></label>
-											<input class="form-control" type="text" name="lastname" required placeholder="Introduzca un apellido" value="{{ old('lastname') }}" id="lastname">
+											<input class="form-control" type="text" name="lastname" required placeholder="Introduzca un apellido" value="{{ old('lastname') }}">
 										</div>
 									</div> 
 								</div>

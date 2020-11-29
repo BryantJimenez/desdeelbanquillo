@@ -18,7 +18,7 @@ class AdminMiddleware
         if (auth()->check() && (auth()->user()->type==1 || auth()->user()->type==2)) {
             return $next($request);
         }
-        
-        return redirect()->route('home');
+
+        return abort('403');
     }
 }

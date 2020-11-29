@@ -2568,3 +2568,66 @@ label.error {
 .border-grey {
   border-color: #F1F2F3 !important;
 }
+
+.card-logo-rounded {
+  width: 105px;
+  height: 105px;
+}
+
+@media (max-width: 431px)  {
+  .card-logo-text p {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+@media (min-width: 432px) and (max-width: 530px)  {
+  .card-logo-rounded {
+    width: 120px;
+    height: 120px;
+  }
+
+  .card-logo-text p {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 531px) and (max-width: 1199px)  {
+  .card-logo-text p {
+    font-size: 22px;
+    line-height: 22px;
+  }
+}
+
+@media (min-width: 1400px)  {
+  .card-logo-text p {
+    font-size: 20px;
+    line-height: 22px;
+  }
+}
+
+@media (min-width: 1700px)  {
+  .card-logo-rounded {
+    width: 120px;
+    height: 120px;
+  }
+
+  .card-logo-text p {
+    font-size: 26px;
+    line-height: 24px;
+  }
+
+  .counter-card p {
+    font-size: 36px;
+  }
+
+  .card-logo-text .h5, .counter-card .h5 {
+    font-size: 30px;
+    line-height: 24px;
+  }
+}
+
+text.apexcharts-datalabel-label {
+  font-size: 16px !important;
+}

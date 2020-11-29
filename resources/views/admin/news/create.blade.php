@@ -3,8 +3,10 @@
 @section('title', 'Crear Noticia')
 
 @section('links')
+<link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/select2/select2.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/admins/css/forms/switches.css') }}">
 <link rel="stylesheet" href="{{ asset('/admins/vendor/dropify/dropify.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/jquery-taginput/jquery.tagsinput.css') }}">
 <link rel="stylesheet" href="{{ asset('/admins/vendor/lobibox/Lobibox.min.css') }}">
 @endsection
 
@@ -54,19 +56,19 @@
 
 								<div class="form-group col-12">
 									<label class="col-form-label">Video (Opcional)</label>
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">https://www.youtube.com/watch?v=</span>
-										</div>
-										<input type="text" class="form-control" name="video" placeholder="FCcrB1ZXYQM" value="{{ old('video') }}">
-									</div>
+									<input type="text" class="form-control" name="video" placeholder="https://www.youtube.com/embed/FCcrB1ZXYQM" value="{{ old('video') }}">
+								</div>
+
+								<div class="form-group col-12">
+									<label class="col-form-label">Etiquetas<b class="text-danger">*</b></label>
+									<input type="text" class="form-control" name="tags" placeholder="Introduce etiquetas" value="{{ old('tags') }}" id="tags">
 								</div>
 
 								<div class="form-group col-xl-6 col-lg-6 col-md-6 col-12">
 									<label class="col-form-label">Desactivar/Activar Comentarios<b class="text-danger">*</b></label>
 									<div>
 										<label class="switch s-icons s-outline s-outline-primary mr-2">
-											<input type="checkbox" checked required value="1" id="commentCheckbox">
+											<input type="checkbox" checked value="1" id="commentCheckbox">
 											<span class="slider round"></span>
 											<input type="hidden" name="comments" required value="1" id="commentHidden">
 										</label>
@@ -75,11 +77,15 @@
 
 								<div class="form-group col-xl-6 col-lg-6 col-md-6 col-12">
 									<label class="col-form-label">Categoría<b class="text-danger">*</b></label>
-									<select class="form-control" name="category_id" required>
+									<select class="form-control select2" name="category_id[]" required multiple>
 										<option value="">Seleccione</option>
+										@if(is_array(old('category_id')) && count(old('category_id'))>0)
+										{!! selectArray($categories, old('category_id')) !!}
+										@else
 										@foreach($categories as $category)
-										<option value="{{ $category->slug }}" @if($category->slug==old('category_id')) selected @endif>{{ $category->name }}</option>
+										<option value="{{ $category->slug }}">{{ $category->name }}</option>
 										@endforeach
+										@endif
 									</select>
 								</div>
 
@@ -97,7 +103,7 @@
 									<label class="col-form-label">Estado<b class="text-danger">*</b></label>
 									<select class="form-control" name="state" required>
 										<option value="1" @if(old('state')=="1") selected @endif>Publicado</option>
-										<option value="3" @if(old('state')=="2") selected @endif>Borrador</option>
+										<option value="2" @if(old('state')=="2") selected @endif>Borrador</option>
 									</select>
 								</div>
 
@@ -121,8 +127,11 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('/admins/vendor/select2/select2.min.js') }}"></script>
+<script src="{{ asset('/admins/vendor/select2/custom-select2.js') }}"></script>
 <script src="{{ asset('/admins/vendor/dropify/dropify.min.js') }}"></script>
 <script src="{{ asset('/admins/vendor/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('/admins/vendor/jquery-taginput/jquery.tagsinput.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/jquery.validate.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/additional-methods.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/messages_es.js') }}"></script>

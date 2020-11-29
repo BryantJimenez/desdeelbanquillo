@@ -55,9 +55,9 @@ class UserController extends Controller
         $user->fill(['state' => 0])->save();
 
         if ($user) {
-            return redirect()->route('usuarios.index')->with(['type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El usuario ha sido desactivado exitosamente.']);
+            return redirect()->route('usuarios.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El usuario ha sido desactivado exitosamente.']);
         } else {
-            return redirect()->route('usuarios.index')->with(['type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('usuarios.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
         }
     }
 
@@ -67,9 +67,9 @@ class UserController extends Controller
         $user->fill(['state' => "1"])->save();
 
         if ($user) {
-            return redirect()->route('usuarios.index')->with(['type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El usuario ha sido activado exitosamente.']);
+            return redirect()->route('usuarios.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El usuario ha sido activado exitosamente.']);
         } else {
-            return redirect()->route('usuarios.index')->with(['type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('usuarios.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
         }
     }
 

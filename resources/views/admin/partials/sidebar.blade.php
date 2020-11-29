@@ -20,6 +20,7 @@
                 </a>
             </li>
 
+            @if(Auth::user()->type=="1")
             <li class="menu {{ active('admin/administradores', 0) }}">
                 <a href="{{ route('administradores.index') }}" aria-expanded="{{ menu_expanded('admin/administradores', 0) }}" class="dropdown-toggle">
                     <div class="">
@@ -27,6 +28,7 @@
                     </div>
                 </a>
             </li>
+            @endif
 
             <li class="menu {{ active('admin/usuarios', 0) }}">
                 <a href="{{ route('usuarios.index') }}" aria-expanded="{{ menu_expanded('admin/usuarios', 0) }}" class="dropdown-toggle">
@@ -53,31 +55,23 @@
             </li>
 
             <li class="menu {{ active('admin/comentarios', 0) }}">
-                <a href="javascript:void(0);" aria-expanded="{{ menu_expanded('admin/comentarios', 0) }}" class="dropdown-toggle">
+                <a href="{{ route('comentarios.index') }}" aria-expanded="{{ menu_expanded('admin/comentarios', 0) }}" class="dropdown-toggle">
                     <div class="">
                         <span><i class="far fa-comments"></i> Comentarios</span>
                     </div>
                 </a>
             </li>
 
-            <li class="menu {{ active('admin/entrevistas', 0) }}">
-                <a href="javascript:void(0);" aria-expanded="{{ menu_expanded('admin/entrevistas', 0) }}" class="dropdown-toggle">
-                    <div class="">
-                        <span><i class="fa fa-microphone-alt"></i> Entrevistas</span>
-                    </div>
-                </a>
-            </li>
-
             <li class="menu {{ active('admin/videos', 0) }}">
-                <a href="javascript:void(0);" aria-expanded="{{ menu_expanded('admin/videos', 0) }}" class="dropdown-toggle">
+                <a href="{{ route('videos.index') }}" aria-expanded="{{ menu_expanded('admin/videos', 0) }}" class="dropdown-toggle">
                     <div class="">
                         <span><i class="fab fa-youtube"></i> Videos</span>
                     </div>
                 </a>
             </li>
 
-            <li class="menu {{ active('admin/galerias', 0) }}">
-                <a href="#gallery" data-toggle="collapse" aria-expanded="{{ menu_expanded('admin/galerias', 0) }}" class="dropdown-toggle">
+            <li class="menu {{ active('admin/galeria', 0) }}">
+                <a href="#gallery" data-toggle="collapse" aria-expanded="{{ menu_expanded('admin/galeria', 0) }}" class="dropdown-toggle">
                     <div class="">
                         <span><i class="fa fa-images"></i> Galería de Fotos</span>
                     </div>
@@ -85,35 +79,17 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled {{ submenu('admin/galerias', 0) }} }}" id="gallery" data-parent="#accordionExample">
-                    <li {{ submenu('admin/banners') }}>
-                        <a href="javascript:void(0);"> Categorías</a>
+                <ul class="collapse submenu list-unstyled {{ submenu('admin/galeria', 0) }} }}" id="gallery" data-parent="#accordionExample">
+                    <li {{ submenu('admin/galeria/categorias') }}>
+                        <a href="{{ route('galerias.categorias.index') }}"> Categorías</a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0);"> Fotos</a>
+                    <li {{ submenu('admin/galeria') }}>
+                        <a href="{{ route('galerias.index') }}"> Fotos</a>
                     </li>                           
                 </ul>
             </li>
 
-            <li class="menu {{ active('admin/paginas', 0) }}">
-                <a href="#page" data-toggle="collapse" aria-expanded="{{ menu_expanded('admin/paginas', 0) }}" class="dropdown-toggle">
-                    <div class="">
-                        <span><i class="fa fa-bullhorn"></i> Páginas</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </a>
-                <ul class="collapse submenu list-unstyled {{ submenu('admin/paginas', 0) }} }}" id="page" data-parent="#accordionExample">
-                    <li {{ submenu('admin/banners') }}>
-                        <a href="javascript:void(0);"> Premios Deb</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);"> E-Sport</a>
-                    </li>                           
-                </ul>
-            </li>
-
+            @if(Auth::user()->type=="1")
             <li class="menu {{ active('admin/banners', 0) }}">
                 <a href="#advertising" data-toggle="collapse" aria-expanded="{{ menu_expanded('admin/banners', 0) }}" class="dropdown-toggle">
                     <div class="">
@@ -127,49 +103,54 @@
                     <li {{ submenu('admin/banners') }}>
                         <a href="{{ route('banners.index') }}"> Banners Principales</a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0);"> Banners Noticias</a>
+                    <li {{ submenu('admin/banners/noticias') }}>
+                        <a href="{{ route('banners.noticias.index') }}"> Banners Noticias</a>
                     </li>                           
                 </ul>
             </li>
+            @endif
 
             <li class="menu {{ active('admin/visitas', 0) }}">
-                <a href="javascript:void(0);" aria-expanded="{{ menu_expanded('admin/visitas', 0) }}" class="dropdown-toggle">
+                <a href="{{ route('visitas.index') }}" aria-expanded="{{ menu_expanded('admin/visitas', 0) }}" class="dropdown-toggle">
                     <div class="">
                         <span><i class="fa fa-chart-line"></i> Visitas</span>
                     </div>
                 </a>
             </li>
 
-            <li class="menu {{ active('admin/torneos', 0) }}">
-                <a href="javascript:void(0);" aria-expanded="{{ menu_expanded('admin/torneos', 0) }}" class="dropdown-toggle">
+            @if(Auth::user()->type=="1")
+            <li class="menu {{ active('admin/ligas', 0) }}">
+                <a href="{{ route('torneos.index') }}" aria-expanded="{{ menu_expanded('admin/ligas', 0) }}" class="dropdown-toggle">
                     <div class="">
-                        <span><i class="fa fa-trophy"></i> Torneos</span>
+                        <span><i class="fa fa-trophy"></i> Ligas</span>
+                    </div>
+                </a>
+            </li>
+
+            <li class="menu {{ active('admin/estadios', 0) }}">
+                <a href="{{ route('estadios.index') }}" aria-expanded="{{ menu_expanded('admin/estadios', 0) }}" class="dropdown-toggle">
+                    <div class="">
+                        <span><i class="fa fa-futbol"></i> Estadios</span>
+                    </div>
+                </a>
+            </li>
+
+            <li class="menu {{ active('admin/resultados-en-directo', 0) }}">
+                <a href="{{ route('resultados.result') }}" aria-expanded="{{ menu_expanded('admin/resultados-en-directo', 0) }}" class="dropdown-toggle">
+                    <div class="">
+                        <span><i class="fa fa-clock"></i> Resultados en Directo</span>
                     </div>
                 </a>
             </li>
 
             <li class="menu {{ active('admin/ajustes', 0) }}">
-                <a href="#cog" data-toggle="collapse" aria-expanded="{{ menu_expanded('admin/ajustes', 0) }}" class="dropdown-toggle">
+                <a href="{{ route('ajustes.edit') }}" aria-expanded="{{ menu_expanded('admin/ajustes', 0) }}" class="dropdown-toggle">
                     <div class="">
                         <span><i class="fa fa-cogs"></i> Ajustes</span>
                     </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
                 </a>
-                <ul class="collapse submenu list-unstyled {{ submenu('admin/ajustes', 0) }} }}" id="cog" data-parent="#accordionExample">
-                    <li {{ submenu('admin/ajustes') }}>
-                        <a href="javascript:void(0);"> Publicidad Botonera</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);"> Redes Sociales</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);"> Contacto</a>
-                    </li>
-                </ul>
             </li>
+            @endif
         </ul>
 
     </nav>

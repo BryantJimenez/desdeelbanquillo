@@ -15,6 +15,7 @@
     <!-- END GLOBAL MANDATORY STYLES -->
     <link href="{{ asset('/admins/css/forms/theme-checkbox-radio.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/admins/css/forms/switches.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('/admins/vendor/lobibox/Lobibox.min.css') }}">
 </head>
 <body class="form">
 
@@ -27,6 +28,7 @@
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
     <script src="{{ asset('/admins/js/authentication/form-2.js') }}"></script>
-
+    <script src="{{ asset('/admins/vendor/lobibox/Lobibox.js') }}"></script>
+    @include('admin.partials.notifications')
 </body>
 </html>

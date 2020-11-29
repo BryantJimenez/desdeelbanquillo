@@ -2,10 +2,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close close-auth" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <p class="h5 text-body text-center mt-2 mb-3">Registrate</p>
+
+                <div class="form-group col-12">
+                    @include('admin.partials.errors')
+
+                    @if(session('error.register'))
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <ul>
+                            <li>{{ session('error.register') }}</li>
+                        </ul>
+                    </div>
+                    @endif
+                </div>
+
                 <div class="form-group col-12">
                     <button type="submit" class="btn btn-facebook rounded text-white px-3 w-100">Continuar con Facebook</button>
                 </div>
@@ -15,7 +29,7 @@
                         <hr>
                     </div>
                 </div>
-                <form action="{{ route('register') }}" method="POST" id="formRegister">
+                <form action="{{ route('register.custom') }}" method="POST" id="formRegister">
                     {{ csrf_field() }}
                     <div class="form-group col-12">
                         <input class="form-control @error('name') is-invalid @enderror py-4 pl-1" type="text" name="name" required placeholder="Nombre" value="{{ old('name') }}" autocomplete="name">
